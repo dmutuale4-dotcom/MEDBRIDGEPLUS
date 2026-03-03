@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEDBRIDΞPLUS – Coordination Médicale Internationale</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:      
+#C8102E;
+    --red-dark: 
+#9B0C22;
+    --red-pale: 
+#FFF0F2;
+    --red-mid:  
+#F5D0D6;
+    --navy:     
+#1B2A4A;
+    --blue-mid: 
+#2C4070;
+    --white:    
+#FFFFFF;
+    --gray-bg:  
+#F4F6FA;
+    --gray-card:
+#ECEEF4;
+    --line:     
+#E0E4EE;
+    --muted:    
+#7B8499;
+    --text:     
+#1B2A4A;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+font-family: ‘Lato’, sans-serif;
+background: var(–white);
+color: var(–text);
+overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(–red); }
+
+/* ─────────────────────────── NAV ─────────────────────────── */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+height: 70px;
+background: var(–white);
+border-bottom: 1px solid var(–line);
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 5vw;
+box-shadow: 0 1px 16px rgba(27,42,74,0.06);
+}
+
+.nav-brand {
+display: flex; align-items: center; gap: 1rem;
+}
+
+/* Logo placeholder box */
+.logo-slot {
+width: 42px; height: 42px;
+border: 2px dashed var(–line);
+border-radius: 4px;
+display: flex; align-items: center; justify-content: center;
+background: var(–gray-bg);
+flex-shrink: 0;
+}
+.logo-slot span {
+font-size: 0.52rem; color: var(–muted);
+font-family: ‘Montserrat’, sans-serif;
+font-weight: 600; letter-spacing: 0.04em;
+text-align: center; line-height: 1.3;
+text-transform: uppercase;
+}
+
+/* Wordmark */
+.wordmark {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 1.18rem; font-weight: 800; letter-spacing: 0.04em;
+color: var(–navy); line-height: 1;
+user-select: none;
+}
+.wordmark .xi { color: var(–red); }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+text-transform: uppercase; color: var(–muted);
+text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(–red); }
+
+.nav-cta {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+text-transform: uppercase;
+background: var(–red); color: var(–white);
+border: none; padding: 0.62rem 1.5rem;
+cursor: pointer; transition: background .2s, transform .15s;
+border-radius: 2px;
+}
+.nav-cta:hover { background: var(–red-dark); transform: translateY(-1px); }
+
+/* ─────────────────────────── HERO ─────────────────────────── */
+.hero {
+padding-top: 70px;
+min-height: 100vh;
+background: var(–white);
+display: grid;
+grid-template-columns: 1fr 1fr;
+align-items: center;
+position: relative;
+overflow: hidden;
+}
+
+/* Subtle geometric background */
+.hero::before {
+content: ‘’;
+position: absolute; top: 0; right: 0;
+width: 55%; height: 100%;
+background: var(–gray-bg);
+clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+pointer-events: none;
+}
+
+/* ECG subtle line */
+.hero-ecg {
+position: absolute; bottom: 60px; left: 0; right: 0;
+height: 80px; opacity: 0.06; pointer-events: none;
+}
+.ecg-p {
+stroke-dasharray: 2000; stroke-dashoffset: 2000;
+animation: ecgDraw 2.8s ease .6s forwards;
+}
+@keyframes ecgDraw { to { stroke-dashoffset: 0; } }
+
+.hero-left {
+padding: 4rem 5vw 4rem;
+position: relative; z-index: 2;
+animation: fadeUp .7s ease both;
+}
+
+.hero-right {
+padding: 4rem 5vw 4rem 3rem;
+position: relative; z-index: 2;
+display: flex; flex-direction: column; gap: 1.2rem;
+animation: fadeUp .7s .2s ease both;
+}
+
+/* Pill badge */
+.hero-pill {
+display: inline-flex; align-items: center; gap: 0.5rem;
+background: var(–red-pale); color: var(–red);
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em;
+text-transform: uppercase; padding: 0.35rem 0.9rem;
+border-radius: 999px; margin-bottom: 1.4rem;
+border: 1px solid var(–red-mid);
+}
+.hero-pill::before {
+content: ‘’; width: 6px; height: 6px; border-radius: 50%;
+background: var(–red); animation: pulse 1.6s ease infinite;
+}
+@keyframes pulse {
+0%,100% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.5); opacity: .5; }
+}
+
+.hero-h1 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+font-weight: 800; line-height: 1.1; color: var(–navy);
+margin-bottom: 1.4rem;
+}
+.hero-h1 .red { color: var(–red); }
+.hero-h1 .light { font-weight: 300; font-style: italic; }
+
+.hero-sub {
+font-size: 1rem; line-height: 1.8; color: var(–muted);
+font-weight: 300; max-width: 460px; margin-bottom: 2.4rem;
+}
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-red {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em;
+text-transform: uppercase; background: var(–red);
+color: var(–white); border: none; cursor: pointer;
+padding: 0.9rem 2.2rem; border-radius: 2px;
+transition: background .2s, transform .15s; box-shadow: 0 4px 14px rgba(200,16,46,0.25);
+}
+.btn-red:hover { background: var(–red-dark); transform: translateY(-2px); }
+
+.btn-outline {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em;
+text-transform: uppercase; background: transparent;
+color: var(–navy); border: 1.5px solid var(–line); cursor: pointer;
+padding: 0.9rem 2.2rem; border-radius: 2px;
+transition: all .2s;
+}
+.btn-outline:hover { border-color: var(–navy); background: var(–navy); color: var(–white); }
+
+/* Stats cards on right */
+.stat-cards {
+display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.stat-card {
+background: var(–white);
+border: 1px solid var(–line);
+border-radius: 8px; padding: 1.4rem 1.5rem;
+box-shadow: 0 2px 12px rgba(27,42,74,0.06);
+transition: transform .2s, box-shadow .2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(27,42,74,0.10); }
+.stat-card.accent { border-top: 3px solid var(–red); }
+.stat-num {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 2.2rem; font-weight: 800; color: var(–navy); line-height: 1;
+}
+.stat-num sup { font-size: 1rem; color: var(–red); }
+.stat-lbl {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em;
+text-transform: uppercase; color: var(–muted); margin-top: 0.4rem;
+}
+.stat-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+
+/* ─────────────────────────── SECTIONS ─────────────────────────── */
+.sec { padding: 6rem 5vw; }
+.sec-gray { background: var(–gray-bg); }
+
+.tag {
+display: inline-flex; align-items: center; gap: 0.6rem;
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3em;
+text-transform: uppercase; color: var(–red); margin-bottom: 0.9rem;
+}
+.tag::before { content: ‘’; width: 22px; height: 2px; background: var(–red); border-radius: 2px; }
+
+.h2 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(1.7rem, 2.8vw, 2.7rem);
+font-weight: 800; line-height: 1.2; color: var(–navy);
+margin-bottom: 1rem;
+}
+.lead { font-size: 1rem; line-height: 1.8; color: var(–muted); font-weight: 300; max-width: 500px; }
+
+/* ─────────────────────────── ENJEU ─────────────────────────── */
+.enjeu-wrap {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 5rem; align-items: center;
+}
+.enjeu-cards { display: flex; flex-direction: column; gap: 0.8rem; }
+.ec {
+background: var(–white);
+border: 1px solid var(–line); border-radius: 6px;
+padding: 1.1rem 1.4rem;
+display: flex; align-items: flex-start; gap: 0.9rem;
+font-size: 0.9rem; color: var(–text); line-height: 1.55;
+transition: all .2s; box-shadow: 0 1px 4px rgba(27,42,74,0.04);
+}
+.ec:hover { border-color: var(–red); box-shadow: 0 4px 14px rgba(200,16,46,0.08); transform: translateX(4px); }
+.ec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(–red); flex-shrink: 0; margin-top: 0.42rem; }
+
+/* ─────────────────────────── PILIERS ─────────────────────────── */
+.piliers-grid {
+display: grid; grid-template-columns: repeat(3, 1fr);
+gap: 1.2rem; margin-top: 3rem;
+}
+.pilier {
+background: var(–white);
+border: 1px solid var(–line); border-radius: 10px;
+padding: 2.4rem 2rem;
+transition: transform .25s, box-shadow .25s;
+position: relative; overflow: hidden;
+}
+.pilier::before {
+content: ‘’; position: absolute;
+top: 0; left: 0; right: 0; height: 3px;
+background: var(–red); transform: scaleX(0);
+transform-origin: left; transition: transform .3s;
+}
+.pilier:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(27,42,74,0.10); }
+.pilier:hover::before { transform: scaleX(1); }
+
+.picon {
+width: 46px; height: 46px; border-radius: 8px;
+background: var(–red-pale); display: flex;
+align-items: center; justify-content: center; margin-bottom: 1.4rem;
+}
+.picon svg { width: 20px; height: 20px; stroke: var(–red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pcode {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3em;
+text-transform: uppercase; color: var(–red); margin-bottom: 0.4rem;
+}
+.pilier h3 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 1rem; font-weight: 700; color: var(–navy);
+line-height: 1.35; margin-bottom: 0.8rem;
+}
+.pilier p { font-size: 0.87rem; line-height: 1.7; color: var(–muted); font-weight: 300; }
+
+/* ─────────────────────────── RED BANNER ─────────────────────────── */
+.red-banner {
+background: var(–red);
+padding: 4.5rem 5vw;
+position: relative; overflow: hidden;
+}
+.red-banner::after {
+content: ‘’;
+position: absolute; top: 0; right: 0; bottom: 0;
+width: 40%;
+background: rgba(255,255,255,0.04);
+clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+pointer-events: none;
+}
+.rbn-in {
+display: flex; align-items: center; justify-content: space-between;
+gap: 3rem; position: relative; z-index: 1;
+}
+.rbn-in h2 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+font-weight: 800; color: var(–white);
+line-height: 1.3; max-width: 560px;
+}
+.rbn-in h2 em { font-style: italic; font-weight: 300; color: rgba(255,255,255,0.75); }
+.btn-wh {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+text-transform: uppercase; background: var(–white);
+color: var(–red); border: none; cursor: pointer;
+padding: 0.9rem 2.4rem; border-radius: 2px;
+white-space: nowrap; flex-shrink: 0;
+transition: all .2s;
+}
+.btn-wh:hover { background: var(–navy); color: var(–white); }
+
+/* ─────────────────────────── PACKS ─────────────────────────── */
+.packs-grid {
+display: grid; grid-template-columns: repeat(3, 1fr);
+gap: 1.2rem; margin-top: 3rem;
+}
+.pack {
+background: var(–white);
+border: 1px solid var(–line); border-radius: 10px;
+padding: 2.4rem 2rem; display: flex; flex-direction: column;
+position: relative; transition: transform .25s, box-shadow .25s;
+}
+.pack:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(27,42,74,0.09); }
+.pack.feat {
+border-color: var(–navy); background: var(–navy);
+box-shadow: 0 8px 30px rgba(27,42,74,0.2);
+}
+.pbadge {
+position: absolute; top: -1px; left: 1.5rem;
+background: var(–red); color: var(–white);
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em;
+text-transform: uppercase; padding: 0.26rem 0.8rem;
+border-radius: 0 0 4px 4px;
+}
+.ptier {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em;
+text-transform: uppercase; color: var(–red); margin-bottom: 0.4rem;
+}
+.pack.feat .ptier { color: rgba(200,16,46,0.7); }
+.pname {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 1.35rem; font-weight: 800; color: var(–navy);
+line-height: 1.2; margin-bottom: 0.3rem;
+}
+.pack.feat .pname { color: var(–white); }
+.psub { font-size: 0.8rem; color: var(–muted); margin-bottom: 1.8rem; }
+.pack.feat .psub { color: rgba(255,255,255,0.4); }
+.phr { height: 1px; background: var(–line); margin-bottom: 1.8rem; }
+.pack.feat .phr { background: rgba(255,255,255,0.1); }
+.plist { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+.plist li {
+font-size: 0.87rem; color: var(–text);
+display: flex; gap: 0.7rem; align-items: flex-start; line-height: 1.5;
+}
+.pack.feat .plist li { color: rgba(255,255,255,0.8); }
+.ck { color: var(–red); font-weight: 900; flex-shrink: 0; margin-top: 0.02rem; }
+.pack.feat .ck { color: 
+#FF8095; }
+.pbtn {
+margin-top: 2rem; padding: 0.85rem;
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+text-transform: uppercase; cursor: pointer; border: none;
+border-radius: 2px; transition: all .2s; text-align: center;
+}
+.pbo { background: transparent; border: 1.5px solid var(–line); color: var(–navy); }
+.pbo:hover { border-color: var(–navy); background: var(–navy); color: var(–white); }
+.pbr { background: var(–red); color: var(–white); box-shadow: 0 4px 12px rgba(200,16,46,0.3); }
+.pbr:hover { background: var(–red-dark); }
+
+/* ─────────────────────────── PROCESSUS ─────────────────────────── */
+.steps-wrap { margin-top: 3rem; }
+.steps-row {
+display: grid; grid-template-columns: repeat(5, 1fr);
+}
+.step {
+background: var(–white);
+border: 1px solid var(–line); border-right: none;
+padding: 1.8rem 1.4rem;
+transition: background .2s;
+}
+.step:last-child { border-right: 1px solid var(–line); }
+.steps-row + .steps-row .step { border-top: none; }
+.step:hover { background: var(–gray-bg); }
+.step:hover .snum { color: var(–red); }
+.snum {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 1.8rem; font-weight: 800; color: var(–line);
+line-height: 1; margin-bottom: 0.8rem; transition: color .2s;
+}
+.step h4 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.78rem; font-weight: 700; color: var(–navy);
+margin-bottom: 0.3rem;
+}
+.step p { font-size: 0.76rem; color: var(–muted); line-height: 1.5; }
+
+/* ─────────────────────────── ENGAGEMENTS ─────────────────────────── */
+.eng-grid {
+display: grid; grid-template-columns: repeat(4, 1fr);
+gap: 1.2rem; margin-top: 3rem;
+}
+.eng-card {
+background: var(–white);
+border: 1px solid var(–line); border-radius: 10px;
+padding: 2rem 1.6rem;
+transition: transform .25s, box-shadow .25s;
+position: relative; overflow: hidden;
+}
+.eng-card::before {
+content: ‘’; position: absolute;
+top: 0; left: 0; right: 0; height: 3px;
+background: linear-gradient(90deg, var(–red), var(–red-dark));
+transform: scaleX(0); transform-origin: left; transition: transform .35s;
+}
+.eng-card:hover::before { transform: scaleX(1); }
+.eng-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(27,42,74,0.09); }
+.eng-n {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 2.8rem; font-weight: 800; color: var(–red-pale);
+line-height: 1; margin-bottom: 1rem;
+}
+.eng-card h4 {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.88rem; font-weight: 700; color: var(–navy); margin-bottom: 0.6rem;
+}
+.eng-card p { font-size: 0.84rem; color: var(–muted); line-height: 1.65; }
+
+/* ─────────────────────────── CONTACT ─────────────────────────── */
+.contact-wrap {
+display: grid; grid-template-columns: 1fr 1.4fr;
+gap: 5rem; align-items: start;
+}
+.cinfo { display: flex; flex-direction: column; gap: 2rem; }
+.ci-lbl {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.6rem; font-weight: 700; letter-spacing: 0.26em;
+text-transform: uppercase; color: var(–red); margin-bottom: 0.35rem;
+}
+.ci-val { font-size: 0.9rem; color: var(–text); line-height: 1.75; }
+.ci-val strong { font-weight: 700; color: var(–navy); }
+.c-hr { height: 1px; background: var(–line); }
+
+.cform { display: flex; flex-direction: column; gap: 0.85rem; }
+.cform input, .cform select, .cform textarea {
+font-family: ‘Lato’, sans-serif; font-size: 0.9rem;
+background: var(–white); border: 1px solid var(–line);
+border-radius: 4px; color: var(–text);
+padding: 0.85rem 1.1rem; resize: none; outline: none;
+transition: border-color .2s, box-shadow .2s;
+-webkit-appearance: none; appearance: none;
+}
+.cform input:focus, .cform select:focus, .cform textarea:focus {
+border-color: var(–red);
+box-shadow: 0 0 0 3px rgba(200,16,46,0.08);
+}
+.cform input::placeholder, .cform textarea::placeholder { color: 
+#B4BBCA; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+
+/* ─────────────────────────── FOOTER ─────────────────────────── */
+footer {
+background: var(–navy);
+padding: 3rem 5vw;
+display: flex; align-items: center; justify-content: space-between;
+flex-wrap: wrap; gap: 1.5rem;
+}
+.foot-brand {
+display: flex; align-items: center; gap: 0.8rem;
+}
+.foot-logo-slot {
+width: 34px; height: 34px;
+border: 1.5px dashed rgba(255,255,255,0.2);
+border-radius: 3px;
+display: flex; align-items: center; justify-content: center;
+}
+.foot-logo-slot span { font-size: 0.42rem; color: rgba(255,255,255,0.25); font-family: ‘Montserrat’, sans-serif; font-weight: 600; text-align: center; line-height: 1.3; text-transform: uppercase; }
+.foot-wm {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 1rem; font-weight: 800; color: var(–white); letter-spacing: 0.03em;
+}
+.foot-wm .xi { color: var(–red); }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+text-transform: uppercase; color: rgba(255,255,255,0.38);
+text-decoration: none; transition: color .2s;
+}
+.footer-links a:hover { color: var(–red); }
+
+/* ─────────────────────────── ANIMATIONS ─────────────────────────── */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+opacity: 0; transform: translateY(22px);
+transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+
+<nav>
+  <div class="nav-brand">
+    <!-- Logo placeholder: insérez votre logo ici -->
+    <div class="logo-slot">
+      <span>Votre<br>Logo</span>
+    </div>
+    <span class="wordmark">MEDBRIDΞPLUS</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#enjeu">Enjeu</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packs">Offres</a></li>
+    <li><a href="#processus">Processus</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <button class="nav-cta" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+    Demander un devis
+  </button>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+
+<section class="hero">
+  <svg class="hero-ecg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <polyline class="ecg-p"
+      points="0,40 60,40 90,6 120,74 150,22 180,40 340,40 370,40 400,10 430,70 460,28 490,40 650,40 680,40 710,8 740,72 770,24 800,40 960,40 990,40 1020,12 1050,68 1080,26 1110,40 1270,40 1300,40 1330,14 1360,66 1390,28 1420,40 1440,40"
+      stroke="
+#C8102E" stroke-width="2" fill="none"/>
+  </svg>
+
+  <div class="hero-left">
+    <div class="hero-pill">Plateforme Africaine · Hub SA · Bureau RDC</div>
+
+<h1 class="hero-h1">
+  La santé comme<br>
+  <span class="red light">infrastructure</span><br>
+  stratégique.
+</h1>
+
+<p class="hero-sub">
+  Coordination médicale internationale digitalisée, transparente et fiable.
+  Entreprises, hôpitaux, autorités — nous sécurisons chaque parcours patient, du signalement à l'archivage final.
+</p>
+
+<div class="hero-btns">
+  <button class="btn-red" onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">
+    Découvrir nos services
+  </button>
+  <button class="btn-outline" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+    Nous contacter
+  </button>
+</div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-cards">
+      <div class="stat-card accent">
+        <div class="stat-icon">🕐</div>
+        <div class="stat-num">24<sup>/7</sup></div>
+        <div class="stat-lbl">Disponibilité</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-icon">🏥</div>
+        <div class="stat-num">3</div>
+        <div class="stat-lbl">Piliers stratégiques</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-icon">📋</div>
+        <div class="stat-num">10</div>
+        <div class="stat-lbl">Étapes structurées</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-num" style="font-size:1.4rem;line-height:1.4">Multi</div>
+        <div class="stat-lbl">Continental</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ENJEU ══════════════ -->
+
+<section class="sec sec-gray reveal" id="enjeu">
+  <div class="enjeu-wrap">
+    <div>
+      <div class="tag">Enjeu stratégique</div>
+      <h2 class="h2">Une évacuation mal organisée coûte plus que sa coordination.</h2>
+      <p class="lead">
+        Désorganisation, coûts imprévisibles, manque de traçabilité, risques institutionnels.
+        MEDBRIDΞPLUS apporte une solution médicale structurée et professionnelle pour les entreprises, hôpitaux et autorités.
+      </p>
+    </div>
+    <div class="enjeu-cards">
+      <div class="ec"><span class="ec-dot"></span>Les pathologies complexes nécessitent des soins spécialisés à l'international</div>
+      <div class="ec"><span class="ec-dot"></span>Les entreprises doivent protéger leurs talents stratégiques</div>
+      <div class="ec"><span class="ec-dot"></span>Les structures médicales cherchent à améliorer leur coordination</div>
+      <div class="ec"><span class="ec-dot"></span>Les États souhaitent encadrer les évacuations médicales avec traçabilité</div>
+      <div class="ec"><span class="ec-dot"></span>Les systèmes numériques garantissent efficacité et responsabilité</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PILIERS ══════════════ -->
+
+<section class="sec reveal" id="services">
+  <div class="tag">Nos 3 piliers stratégiques</div>
+  <h2 class="h2">Une plateforme. Trois dimensions.</h2>
+  <div class="piliers-grid">
+
+<div class="pilier">
+  <div class="picon">
+    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  </div>
+  <div class="pcode">MedBridge · Pilier 01</div>
+  <h3>Coordination d'évacuation médicale internationale</h3>
+  <p>Organisation complète du signalement jusqu'à l'admission hospitalière à l'étranger. Logistique, administration, escorte médicale, suivi en temps réel.</p>
+</div>
+
+<div class="pilier">
+  <div class="picon">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 12h5"/></svg>
+  </div>
+  <div class="pcode">MedLink · Pilier 02</div>
+  <h3>Télémédecine et orientation spécialisée</h3>
+  <p>Mise en relation directe avec des spécialistes internationaux pour second avis médical, contre-expertise ou téléconsultation à distance, simple et sécurisée.</p>
+</div>
+
+<div class="pilier">
+  <div class="picon">
+    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+  </div>
+  <div class="pcode">DataMed · Pilier 03</div>
+  <h3>Gestion sécurisée et traçabilité complète</h3>
+  <p>Centralisation des dossiers médicaux, accès hiérarchisé, archivage sécurisé aux standards internationaux et reporting structuré.</p>
+</div>
+  </div>
+</section>
+
+<!-- ══════════════ RED BANNER ══════════════ -->
+
+<div class="red-banner reveal">
+  <div class="rbn-in">
+    <h2>Digitaliser la coordination médicale pour garantir <em>transparence, efficacité et responsabilité.</em></h2>
+    <button class="btn-wh" onclick="document.querySelector('#packs').scrollIntoView({behavior:'smooth'})">Voir nos offres</button>
+  </div>
+</div>
+
+<!-- ══════════════ PACKS ══════════════ -->
+
+<section class="sec sec-gray reveal" id="packs">
+  <div class="tag">Nos offres de partenariat</div>
+  <h2 class="h2">Choisissez votre couverture.</h2>
+  <div class="packs-grid">
+
+<div class="pack">
+  <div class="ptier">Pack Spécial</div>
+  <div class="pname">MedLink</div>
+  <div class="psub">Sur devis · Télémédecine ciblée</div>
+  <div class="phr"></div>
+  <ul class="plist">
+    <li><span class="ck">✓</span> Accès direct à des spécialistes étrangers</li>
+    <li><span class="ck">✓</span> Téléconsultations internationales</li>
+    <li><span class="ck">✓</span> Second avis ou contre-expertise</li>
+    <li><span class="ck">✓</span> Processus simple et sécurisé via la plateforme</li>
+  </ul>
+  <button class="pbtn pbo">Demander un devis</button>
+</div>
+
+<div class="pack feat">
+  <div class="pbadge">Recommandé</div>
+  <div class="ptier">Pack Premium</div>
+  <div class="pname">MEDBRIDΞPLUS</div>
+  <div class="psub">Sur devis · Couverture totale</div>
+  <div class="phr"></div>
+  <ul class="plist">
+    <li><span class="ck">✓</span> MedBridge : Coordination complète des évacuations</li>
+    <li><span class="ck">✓</span> MedLink : Télémédecine internationale</li>
+    <li><span class="ck">✓</span> DataMed : Gestion sécurisée des dossiers</li>
+    <li><span class="ck">✓</span> Suivi numérique du signalement à l'archivage</li>
+    <li><span class="ck">✓</span> Reporting détaillé pour entreprises & institutions</li>
+    <li><span class="ck">✓</span> Disponibilité 24/7</li>
+  </ul>
+  <button class="pbtn pbr">Demander un devis</button>
+</div>
+
+<div class="pack">
+  <div class="ptier">Pack Standard</div>
+  <div class="pname">MedBridge + DataMed</div>
+  <div class="psub">Sur devis · Coordination & traçabilité</div>
+  <div class="phr"></div>
+  <ul class="plist">
+    <li><span class="ck">✓</span> Coordination des évacuations médicales</li>
+    <li><span class="ck">✓</span> Gestion numérique des dossiers patients</li>
+    <li><span class="ck">✓</span> Transmission rapide et sécurisée</li>
+    <li><span class="ck">✓</span> Reporting structuré pour planification</li>
+  </ul>
+  <button class="pbtn pbo">Demander un devis</button>
+</div>
+  </div>
+</section>
+
+<!-- ══════════════ PROCESSUS ══════════════ -->
+
+<section class="sec reveal" id="processus">
+  <div class="tag">Notre méthode</div>
+  <h2 class="h2">10 étapes. Zéro improvisation.</h2>
+  <div class="steps-wrap">
+    <div class="steps-row">
+      <div class="step"><div class="snum">01</div><h4>Signalement</h4><p>Activation du cas et ouverture du dossier numérique</p></div>
+      <div class="step"><div class="snum">02</div><h4>Analyse médicale</h4><p>Évaluation approfondie de la situation clinique</p></div>
+      <div class="step"><div class="snum">03</div><h4>Télémédecine</h4><p>Consultation spécialisée internationale si nécessaire</p></div>
+      <div class="step"><div class="snum">04</div><h4>Destination</h4><p>Validation de l'établissement hospitalier cible</p></div>
+      <div class="step"><div class="snum">05</div><h4>Organisation</h4><p>Démarches administratives et visa médical</p></div>
+    </div>
+    <div class="steps-row">
+      <div class="step"><div class="snum">06</div><h4>Logistique</h4><p>Transport et escorte médicale si requise</p></div>
+      <div class="step"><div class="snum">07</div><h4>Admission</h4><p>Accueil et prise en charge hospitalière</p></div>
+      <div class="step"><div class="snum">08</div><h4>Suivi temps réel</h4><p>Monitoring continu du parcours patient</p></div>
+      <div class="step"><div class="snum">09</div><h4>Rapport final</h4><p>Documentation complète et structurée</p></div>
+      <div class="step"><div class="snum">10</div><h4>Archivage sécurisé</h4><p>Clôture et conservation du dossier</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ENGAGEMENTS ══════════════ -->
+
+<section class="sec sec-gray reveal">
+  <div class="tag">Partenariats & engagements</div>
+  <h2 class="h2">Des valeurs non négociables.</h2>
+  <div class="eng-grid">
+    <div class="eng-card">
+      <div class="eng-n">01</div>
+      <h4>Réseau hospitalier international</h4>
+      <p>Collaboration avec des groupes hospitaliers de référence et services d'urgence disponibles 24h/24, 7j/7.</p>
+    </div>
+    <div class="eng-card">
+      <div class="eng-n">02</div>
+      <h4>Éthique professionnelle</h4>
+      <p>Coordination rigoureuse et éthique. Chaque décision est médicalement justifiée et entièrement documentée.</p>
+    </div>
+    <div class="eng-card">
+      <div class="eng-n">03</div>
+      <h4>Confidentialité absolue</h4>
+      <p>Neutralité institutionnelle et protection des données selon les standards internationaux les plus stricts.</p>
+    </div>
+    <div class="eng-card">
+      <div class="eng-n">04</div>
+      <h4>Expansion continentale</h4>
+      <p>Déploiement progressif vers l'Europe, l'Amérique du Nord, le Moyen-Orient et l'Asie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+
+<section class="sec reveal" id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="tag">Nous contacter</div>
+      <h2 class="h2">Construisons votre solution ensemble.</h2>
+      <div class="cinfo">
+        <div>
+          <div class="ci-lbl">Bureau Afrique du Sud</div>
+          <div class="ci-val">
+            Cresta, Johannesburg<br>
+            2194 Gauteng, South Africa<br>
+            <strong>+27 (73) 94 90 493</strong>
+          </div>
+        </div>
+        <div class="c-hr"></div>
+        <div>
+          <div class="ci-lbl">Bureau RDC</div>
+          <div class="ci-val">
+            01, Malemba-Nkulu<br>
+            Q/ Socimat, C/ GOMBE<br>
+            Kinshasa, Rép. Dém. du Congo<br>
+            <strong>+243 818 092 797</strong>
+          </div>
+        </div>
+        <div class="c-hr"></div>
+        <div>
+          <div class="ci-lbl">Email & Web</div>
+          <div class="ci-val">
+            contact@medbridgeplus.net<br>
+            <strong>www.medbridgeplus.net</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="cform">
+  <div class="form-row">
+    <input type="text" placeholder="Nom & Prénom">
+    <input type="text" placeholder="Organisation">
+  </div>
+  <input type="email" placeholder="Adresse email professionnelle">
+  <select>
+    <option value="" disabled selected>Type de structure</option>
+    <option>Entreprise / Groupe</option>
+    <option>Hôpital / Clinique</option>
+    <option>Autorité gouvernementale</option>
+    <option>ONG / Institution internationale</option>
+    <option>Particulier</option>
+  </select>
+  <select>
+    <option value="" disabled selected>Pack d'intérêt</option>
+    <option>Pack Premium – MEDBRIDΞPLUS</option>
+    <option>Pack Standard – MedBridge + DataMed</option>
+    <option>Pack Spécial – MedLink</option>
+    <option>Je ne sais pas encore</option>
+  </select>
+  <textarea rows="5" placeholder="Décrivez votre besoin ou situation médicale..."></textarea>
+  <button class="btn-red" style="align-self:flex-start; padding:1rem 2.5rem; font-size:0.74rem;">
+    Envoyer la demande
+  </button>
+</div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+
+<footer>
+  <div class="foot-brand">
+    <div class="foot-logo-slot"><span>Logo</span></div>
+    <span class="foot-wm">MEDBRIDΞPLUS</span>
+  </div>
+  <div class="footer-copy">© 2025–2026 MedBridgePlus (PTY) Ltd. · medbridgeplus.net</div>
+  <div class="footer-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+    <a href="mailto:contact@medbridgeplus.net">Email</a>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
+
