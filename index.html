@@ -509,6 +509,47 @@ RESPONSIVE
 .steps-row { grid-template-columns: 1fr; }
 .step { border-right: none; }
 }
+/* ══════════════════════════════════
+MODAL DEVIS
+══════════════════════════════════ */
+.modal-overlay {
+display: none; position: fixed; inset: 0; z-index: 999;
+background: rgba(27,42,74,0.6); backdrop-filter: blur(4px);
+align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-box {
+background: var(--white); border-radius: 16px;
+width: 100%; max-width: 600px; max-height: 90vh;
+overflow-y: auto; position: relative;
+box-shadow: 0 24px 60px rgba(27,42,74,0.25);
+animation: modalIn .3s ease;
+}
+@keyframes modalIn { from { opacity:0; transform: scale(.96) translateY(16px); } to { opacity:1; transform: scale(1) translateY(0); } }
+.modal-head {
+background: var(--navy); padding: 2.2rem 2.5rem 2rem;
+border-radius: 16px 16px 0 0; position: relative;
+}
+.modal-head::after { content:''; position:absolute; bottom:0; left:2.5rem; right:2.5rem; height:2px; background: var(--red); }
+.modal-tag { font-family:'Montserrat',sans-serif; font-size:0.58rem; font-weight:700; letter-spacing:0.32em; text-transform:uppercase; color:var(--red); margin-bottom:0.5rem; }
+.modal-title { font-family:'Montserrat',sans-serif; font-size:1.4rem; font-weight:800; color:var(--white); line-height:1.25; }
+.modal-close { position:absolute; top:1.5rem; right:1.5rem; background:rgba(255,255,255,0.1); border:none; color:var(--white); width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; line-height:1; }
+.modal-close:hover { background:var(--red); }
+.modal-body { padding: 2.2rem 2.5rem 2.5rem; display:flex; flex-direction:column; gap:1rem; }
+.modal-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.modal-body input, .modal-body select, .modal-body textarea {
+font-family:'Lato',sans-serif; font-size:0.9rem;
+background:var(--offwhite); border:1px solid var(--line);
+border-radius:6px; color:var(--text);
+padding:0.9rem 1.1rem; outline:none; resize:none;
+transition:border-color .2s, box-shadow .2s;
+-webkit-appearance:none; appearance:none; width:100%;
+}
+.modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus { border-color:var(--navy); box-shadow:0 0 0 3px rgba(27,42,74,0.08); }
+.modal-body input::placeholder, .modal-body textarea::placeholder { color:#B2B9CE; }
+.modal-submit { background:var(--red); color:var(--white); border:none; padding:1.05rem; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; transition:background .2s; box-shadow:0 4px 16px rgba(200,16,46,0.3); margin-top:0.5rem; }
+.modal-submit:hover { background:var(--red-dark); }
+.modal-note { font-size:0.78rem; color:var(--gray-text); text-align:center; line-height:1.6; }
+@media(max-width:560px) { .modal-row { grid-template-columns:1fr; } .modal-head, .modal-body { padding-left:1.5rem; padding-right:1.5rem; } }
 </style>
 </head>
 <body>
@@ -525,6 +566,7 @@ VOTRE LOGO : remplacez .logo-slot par :
 </div>
 
 <ul class="nav-links">
+<li><a href="#apropos">À propos</a></li>
 <li><a href="#enjeu">Enjeu</a></li>
 <li><a href="#services">Services</a></li>
 <li><a href="#packs">Offres</a></li>
@@ -532,7 +574,7 @@ VOTRE LOGO : remplacez .logo-slot par :
 <li><a href="#contact">Contact</a></li>
 </ul>
 
-<button class="nav-cta" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+<button class="nav-cta" onclick="document.getElementById('devis-modal').style.display='flex'">
 Demander un devis
 </button>
 </nav>
@@ -548,7 +590,7 @@ stroke="#C8102E" stroke-width="1.5" fill="none"/>
 </svg>
 
 <div class="hero-left">
-<div class="eyebrow">Plateforme Africaine · Hub Afrique du Sud · Bureau RDC</div>
+<div class="eyebrow">Plateforme Médicale Internationale · Hub Afrique du Sud · Bureau RDC</div>
 
 <h1 class="hero-h1">
 La santé comme<br>
@@ -566,8 +608,8 @@ du signalement à l'archivage final.
 <button class="btn-red" onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">
 Découvrir nos services
 </button>
-<button class="btn-ghost" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
-Nous contacter
+<button class="btn-ghost" onclick="document.getElementById('devis-modal').style.display='flex'">
+Demander un devis
 </button>
 </div>
 </div>
@@ -598,6 +640,39 @@ Nous contacter
 </div>
 </div>
 
+</section>
+
+
+<!-- ══════════ À PROPOS ══════════ -->
+<section class="sec sec-navy reveal" id="apropos">
+<div class="stag">À propos</div>
+<h2 class="sh2">Qui sommes-nous ?</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;">
+<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-top:3px solid var(--red);border-radius:12px;padding:2.6rem 2.2rem;">
+<div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem;">Notre Vision</div>
+<h3 style="font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1.35;margin-bottom:1.1rem;">Faire de la coordination médicale internationale un droit accessible à tous.</h3>
+<p style="font-size:0.9rem;line-height:1.85;color:rgba(255,255,255,0.5);font-weight:300;">Nous croyons qu'aucune frontière ne devrait empêcher un patient d'accéder aux soins dont il a besoin. MEDBRIDΞPLUS est né de la conviction que la technologie peut transformer la coordination médicale en un système transparent, traçable et humain — au service des patients, des entreprises et des institutions.</p>
+</div>
+<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-top:3px solid var(--red);border-radius:12px;padding:2.6rem 2.2rem;">
+<div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem;">Notre Mission</div>
+<h3 style="font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1.35;margin-bottom:1.1rem;">Structurer et digitaliser chaque étape du parcours médical international.</h3>
+<p style="font-size:0.9rem;line-height:1.85;color:rgba(255,255,255,0.5);font-weight:300;">Notre mission est de devenir le partenaire de référence en Afrique pour la coordination médicale internationale — en offrant une plateforme digitale intégrée qui gère l'évacuation médicale, la télémédecine et la traçabilité des dossiers, avec rigueur, éthique et efficacité.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem;">
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">🌍</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Présence continentale</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Hub opérationnel en Afrique du Sud, bureau en RDC, expansion vers l'Europe et l'Asie.</p></div>
+</div>
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">🔐</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Standards internationaux</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Conformité aux normes médicales et de confidentialité les plus exigeantes au monde.</p></div>
+</div>
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">💡</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Innovation médicale</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Plateforme numérique propriétaire conçue pour la rapidité, la traçabilité et la fiabilité.</p></div>
+</div>
+</div>
 </section>
 
 
@@ -632,7 +707,7 @@ pour les entreprises, hôpitaux et autorités.
 
 <div class="pilier">
 <div class="p-num">01</div>
-<div class="p-code">MedBridge</div>
+<div class="p-code">MedEva</div>
 <h3>Coordination d'évacuation médicale internationale</h3>
 <p>Organisation complète du signalement jusqu'à l'admission hospitalière à l'étranger. Logistique, administration, escorte médicale, suivi en temps réel.</p>
 </div>
@@ -681,7 +756,7 @@ pour les entreprises, hôpitaux et autorités.
 <li><span class="ck">✓</span> Second avis ou contre-expertise</li>
 <li><span class="ck">✓</span> Processus simple et sécurisé</li>
 </ul>
-<button class="pack-btn pbtn-ol">Demander un devis</button>
+<button class="pack-btn pbtn-ol" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Spécial – MedLink'">Demander un devis</button>
 </div>
 
 <div class="pack feat">
@@ -691,19 +766,19 @@ pour les entreprises, hôpitaux et autorités.
 <div class="pack-sub">Sur devis · Couverture totale</div>
 <div class="pack-hr"></div>
 <ul class="pack-list">
-<li><span class="ck">✓</span> MedBridge : Coordination complète des évacuations</li>
+<li><span class="ck">✓</span> MedEva : Coordination complète des évacuations</li>
 <li><span class="ck">✓</span> MedLink : Télémédecine internationale</li>
 <li><span class="ck">✓</span> DataMed : Gestion sécurisée des dossiers</li>
 <li><span class="ck">✓</span> Suivi numérique du signalement à l'archivage</li>
 <li><span class="ck">✓</span> Reporting détaillé pour entreprises &amp; institutions</li>
 <li><span class="ck">✓</span> Disponibilité 24/7</li>
 </ul>
-<button class="pack-btn pbtn-rd">Demander un devis</button>
+<button class="pack-btn pbtn-rd" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Premium – MEDBRIDΞPLUS'">Demander un devis</button>
 </div>
 
 <div class="pack">
 <div class="pack-tier">Pack Standard</div>
-<div class="pack-name">MedBridge + DataMed</div>
+<div class="pack-name">MedEva + DataMed</div>
 <div class="pack-sub">Sur devis · Coordination &amp; traçabilité</div>
 <div class="pack-hr"></div>
 <ul class="pack-list">
@@ -712,7 +787,7 @@ pour les entreprises, hôpitaux et autorités.
 <li><span class="ck">✓</span> Transmission rapide et sécurisée</li>
 <li><span class="ck">✓</span> Reporting structuré pour planification</li>
 </ul>
-<button class="pack-btn pbtn-ol">Demander un devis</button>
+<button class="pack-btn pbtn-ol" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Standard – MedEva + DataMed'">Demander un devis</button>
 </div>
 
 </div>
@@ -818,9 +893,7 @@ pour les entreprises, hôpitaux et autorités.
 <option>Je ne sais pas encore</option>
 </select>
 <textarea rows="5" placeholder="Décrivez votre besoin ou situation médicale..."></textarea>
-<button class="btn-red" style="align-self:flex-start;padding:1.05rem 2.8rem;font-size:0.72rem;">
-Envoyer la demande
-</button>
+<button class="btn-red" style="align-self:flex-start;padding:1.05rem 2.8rem;font-size:0.72rem;" onclick="document.getElementById('devis-modal').style.display='flex'">Envoyer la demande</button>
 </div>
 
 </div>
@@ -837,7 +910,7 @@ LOGO FOOTER : remplacez par :
 <div class="foot-logo"><span>Logo</span></div>
 <span class="foot-wm">MEDBRID<span class="xi">Ξ</span>PLUS</span>
 </div>
-<div class="foot-copy">© 2025–2026 MEDBRIDGEPLUS (PTY) Ltd. · medbridgeplus.net</div>
+<div class="foot-copy">© 2025–2026 MEDBRIDΞPLUS (PTY) Ltd. · medbridgeplus.net</div>
 <div class="foot-links">
 <a href="https://www.linkedin.com/company/medbridgeplus-pty-ltd/" target="_blank" rel="noopener">LinkedIn</a>
 <a href="https://www.facebook.com/share/1BwuuR8abC/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
@@ -850,4 +923,62 @@ LOGO FOOTER : remplacez par :
 </footer>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<!-- ══════════ MODAL DEVIS ══════════ -->
+<div class="modal-overlay" id="devis-modal" onclick="if(event.target===this)this.style.display='none'">
+<div class="modal-box">
+<div class="modal-head">
+<div class="modal-tag">Demande de devis</div>
+<div class="modal-title">Choisissez votre pack<br>et parlons-en.</div>
+<button class="modal-close" onclick="document.getElementById('devis-modal').style.display='none'">✕</button>
+</div>
+<div class="modal-body">
+<div class="modal-row">
+<input type="text" placeholder="Nom &amp; Prénom" required>
+<input type="text" placeholder="Organisation / Entreprise">
+</div>
+<div class="modal-row">
+<input type="email" placeholder="Email professionnel" required>
+<input type="tel" placeholder="Téléphone / WhatsApp">
+</div>
+<select>
+<option value="" disabled selected>Type de structure</option>
+<option>Entreprise / Groupe industriel</option>
+<option>Hôpital / Clinique</option>
+<option>Autorité gouvernementale</option>
+<option>ONG / Institution internationale</option>
+<option>Particulier</option>
+</select>
+<select id="devis-pack">
+<option value="" disabled selected>Pack d'intérêt</option>
+<option value="Pack Premium – MEDBRIDΞPLUS">Pack Premium – MEDBRIDΞPLUS (Couverture totale)</option>
+<option value="Pack Standard – MedEva + DataMed">Pack Standard – MedEva + DataMed</option>
+<option value="Pack Spécial – MedLink">Pack Spécial – MedLink (Télémédecine)</option>
+<option value="Je ne sais pas encore">Je ne sais pas encore — conseillez-moi</option>
+</select>
+<textarea rows="4" placeholder="Décrivez brièvement votre besoin ou situation médicale..."></textarea>
+<button class="modal-submit">Envoyer ma demande de devis →</button>
+<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; contact@medbridgeplus.net</div>
+</div>
+</div>
+</div>
+
+
+<script>
+/* Scroll reveal */
+const io = new IntersectionObserver(entries => {
+entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Nav shadow on scroll */
+window.addEventListener('scroll', () => {
+document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* Fermer modal avec Escape */
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
+});
+</script>
+</body>
+</html>
