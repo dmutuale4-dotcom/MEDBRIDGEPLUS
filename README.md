@@ -33,15 +33,15 @@ You may also contact one of our coordination managers / Vous pouvez également c
 
 📞 South Africa / Afrique du Sud : 
 
-M. Didier Mutualé : +27 73 949 0493
+Didier Mutualé : +27 73 949 0493
 
 
 
 📞 Democratic Republic of Congo (DRC) / République Démocratique du Congo (RDC) :
 
-M. Divin Malekani : +243 818 092 797
+Divin Malekani : +243 818 092 797
 
-M. Didier Mutualé : +243 816 870 680
+Didier Mutualé : +243 816 870 680
 
 
 
