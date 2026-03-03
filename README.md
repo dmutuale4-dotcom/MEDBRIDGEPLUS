@@ -1,7 +1,7 @@
-# MEDBRIDGΞPLUS
-Plateforme Africaine de Coordination Médicale Internationale Hub Afrique du Sud – Bureau de liaison RDC /
+# MEDBRIDGΞPLUS — Website Update / Mise à jour du site
+International Medical Coordination Platform – South Africa Hub – DRC Liaison Office
 
-MEDBRIDGΞPLUS — Website Update / Mise à jour du site
+Plateforme de Coordination Médicale Internationale – Hub Afrique du Sud – Bureau de liaison RDC
 
 
 
@@ -19,7 +19,7 @@ Toutefois, nos services de coordination médicale et d’accompagnement des pati
 
 For more information, please visit our LinkedIn page / Pour plus d’informations, veuillez consulter notre page LinkedIn :
 
-https://www.linkedin.com/company/medbridgeplus-pty-ltd/
+MEDBRIDGΞPLUS
 
 
 
@@ -46,3 +46,5 @@ Didier Mutualé : +243 816 870 680
 
 
 Thank you for your trust / Merci pour votre confiance.
+
+Feb. 2026 - Fev. 2026
