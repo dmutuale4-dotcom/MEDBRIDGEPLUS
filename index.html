@@ -46,7 +46,7 @@ padding: 0 6vw;
 box-shadow: 0 2px 24px rgba(27,42,74,0.06);
 }
 .nav-brand { display: flex; align-items: center; gap: 1rem; }
-.nav-brand img { height: 42px; width: auto; object-fit: contain; }
+.nav-brand img { height: 70px; width: auto; object-fit: contain; }
 .wordmark { font-family: 'Montserrat', sans-serif; font-size: 1.12rem; font-weight: 800; letter-spacing: 0.06em; color: var(--navy); user-select: none; }
 .wordmark .xi { color: var(--red); }
 .nav-links { display: flex; gap: 2.4rem; list-style: none; }
@@ -122,6 +122,30 @@ pointer-events: none;
 .ecg-svg { position: absolute; bottom: 32px; left: 0; right: 0; height: 56px; opacity: 0.05; pointer-events: none; z-index: 0; }
 .ecg-path { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: ecgDraw 3.2s ease .6s forwards; }
 @keyframes ecgDraw { to { stroke-dashoffset: 0; } }
+
+.hero-logo-wrap {
+display: flex;
+align-items: center;
+margin-bottom: 2.5rem;
+animation: fadeUp .6s ease both;
+}
+.hero-logo-wrap img {
+height: auto;
+width: 100%;
+max-width: 500px;
+object-fit: contain;
+animation: heartbeat 1.4s ease-in-out infinite;
+transform-origin: center;
+filter: drop-shadow(0 8px 24px rgba(200,16,46,0.25));
+}
+@keyframes heartbeat {
+0% { transform: scale(1); }
+14% { transform: scale(1.18); }
+28% { transform: scale(1); }
+42% { transform: scale(1.12); }
+56% { transform: scale(1); }
+100% { transform: scale(1); }
+}
 
 .eyebrow {
 display: inline-flex; align-items: center; gap: 0.65rem;
@@ -409,7 +433,7 @@ display: flex; align-items: center; justify-content: space-between;
 flex-wrap: wrap; gap: 1.5rem;
 }
 .foot-brand { display: flex; align-items: center; gap: 0.85rem; }
-.foot-brand img { height: 34px; width: auto; object-fit: contain; }
+.foot-brand img { height: 60px; width: auto; object-fit: contain; }
 .foot-wm { font-family: 'Montserrat', sans-serif; font-size: 0.96rem; font-weight: 800; color: var(--navy); letter-spacing: 0.05em; }
 .foot-wm .xi { color: var(--red); }
 .foot-copy { font-size: 0.76rem; color: var(--gray-text); }
@@ -489,7 +513,7 @@ transition:border-color .2s, box-shadow .2s;
 <!-- ══════════ NAV ══════════ -->
 <nav>
 <div class="nav-brand">
-<img src="logo.png" alt="MedBridgePlus">
+<img src="logo2.png" alt="MedBridgePlus">
 <span class="wordmark">MEDBRID<span class="xi">Ξ</span>PLUS</span>
 </div>
 
@@ -518,6 +542,9 @@ stroke="#C8102E" stroke-width="1.5" fill="none"/>
 </svg>
 
 <div class="hero-left">
+<div class="hero-logo-wrap">
+<img src="logo2.png" alt="MedBridgePlus Logo">
+</div>
 <div class="eyebrow">Plateforme Médicale Internationale · Hub Afrique du Sud · Bureau RDC</div>
 
 <h1 class="hero-h1">
@@ -794,7 +821,7 @@ pour les entreprises, hôpitaux et autorités.
 <div class="c-hr"></div>
 <div>
 <div class="ci-lbl">Email &amp; Web</div>
-<div class="ci-val">contact@medbridgeplus.net<br><strong>www.medbridgeplus.net</strong></div>
+<div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f7fbfae0f5f7e0d4f9f1f0f6e6fdf0f3f1e4f8e1e7bafaf1e0">[email&#160;protected]</a><br><strong>www.medbridgeplus.net</strong></div>
 </div>
 </div>
 </div>
@@ -822,6 +849,10 @@ pour les entreprises, hôpitaux et autorités.
 </select>
 <textarea rows="5" placeholder="Décrivez votre besoin ou situation médicale..."></textarea>
 <button class="btn-red" style="align-self:flex-start;padding:1.05rem 2.8rem;font-size:0.72rem;" onclick="document.getElementById('devis-modal').style.display='flex'">Envoyer la demande</button>
+
+<div style="display:flex; justify-content:center; align-items:center; margin-top:3rem;">
+<img src="logo2.png" alt="MedBridgePlus Logo" style="height:auto; width:100%; max-width:100%; object-fit:contain; animation:heartbeat 1.4s ease-in-out infinite; transform-origin:center; filter:drop-shadow(0 12px 32px rgba(200,16,46,0.35));">
+</div>
 </div>
 
 </div>
@@ -831,7 +862,7 @@ pour les entreprises, hôpitaux et autorités.
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
 <div class="foot-brand">
-<img src="logo.png" alt="MedBridgePlus">
+<img src="logo2.png" alt="MedBridgePlus">
 <span class="foot-wm">MEDBRID<span class="xi">Ξ</span>PLUS</span>
 </div>
 <div class="foot-copy">© 2025–2026 MEDBRIDΞPLUS (PTY) Ltd. · medbridgeplus.net</div>
@@ -842,7 +873,7 @@ pour les entreprises, hôpitaux et autorités.
 <a href="https://x.com/medbridg22?s=11&t=KiTvHMjeUvV2pzNb5k8zMQ" target="_blank" rel="noopener">Twitter / X</a>
 <a href="https://www.tiktok.com/@medbridgeplus22" target="_blank" rel="noopener">TikTok</a>
 <a href="https://whatsapp.com/channel/0029Vb71SvmJuyAEXSkl5P38" target="_blank" rel="noopener">WhatsApp</a>
-<a href="mailto:contact@medbridgeplus.net">Email</a>
+<a href="/cdn-cgi/l/email-protection#65060a0b110406112508000107170c010200150910164b0b0011">Email</a>
 </div>
 </footer>
 
@@ -881,25 +912,12 @@ pour les entreprises, hôpitaux et autorités.
 </select>
 <textarea rows="4" placeholder="Décrivez brièvement votre besoin ou situation médicale..."></textarea>
 <button class="modal-submit">Envoyer ma demande de devis →</button>
-<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; contact@medbridgeplus.net</div>
+<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a4945445e4b495e6a474f4e4858434e4d4f5a465f5904444f5e">[email&#160;protected]</a></div>
 </div>
 </div>
 </div>
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const io = new IntersectionObserver(entries => {
-entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-window.addEventListener('scroll', () => {
-document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
-});
-
-document.addEventListener('keydown', e => {
-if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
-});
-</script>
-</body>
-</html>
+entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); i
