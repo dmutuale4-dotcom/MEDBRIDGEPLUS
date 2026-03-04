@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<head> <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-
-  
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MEDBRIDΞPLUS – Coordination Médicale Internationale</title>
@@ -40,9 +36,6 @@ overflow-x: hidden;
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-thumb { background: var(--red); }
 
-/* ══════════════════════════════════
-NAV — fond blanc, sobre
-══════════════════════════════════ */
 nav {
 position: fixed; top: 0; left: 0; right: 0; z-index: 300;
 height: 74px;
@@ -53,14 +46,7 @@ padding: 0 6vw;
 box-shadow: 0 2px 24px rgba(27,42,74,0.06);
 }
 .nav-brand { display: flex; align-items: center; gap: 1rem; }
-.logo-slot {
-width: 42px; height: 42px;
-border: 1.5px dashed var(--gray-mid);
-border-radius: 6px;
-display: flex; align-items: center; justify-content: center;
-background: var(--offwhite); flex-shrink: 0; overflow: hidden;
-}
-.logo-slot span { font-size: 0.43rem; color: var(--gray-text); font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; line-height: 1.35; text-transform: uppercase; }
+.nav-brand img { height: 42px; width: auto; object-fit: contain; }
 .wordmark { font-family: 'Montserrat', sans-serif; font-size: 1.12rem; font-weight: 800; letter-spacing: 0.06em; color: var(--navy); user-select: none; }
 .wordmark .xi { color: var(--red); }
 .nav-links { display: flex; gap: 2.4rem; list-style: none; }
@@ -69,7 +55,6 @@ background: var(--offwhite); flex-shrink: 0; overflow: hidden;
 .nav-cta { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; background: var(--navy); color: var(--white); border: none; padding: 0.68rem 1.7rem; cursor: pointer; border-radius: 3px; transition: background .2s, transform .15s; }
 .nav-cta:hover { background: var(--red); transform: translateY(-1px); }
 
-/* HAMBURGER BUTTON */
 .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 6px; transition: background .2s; -webkit-tap-highlight-color: transparent; }
 .hamburger:hover { background: var(--offwhite); }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform .3s ease, opacity .3s ease, width .3s ease; transform-origin: center; }
@@ -77,7 +62,6 @@ background: var(--offwhite); flex-shrink: 0; overflow: hidden;
 .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* MENU MOBILE DRAWER */
 .mobile-menu { display: none; position: fixed; top: 74px; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--line); border-bottom: 3px solid var(--red); box-shadow: 0 8px 32px rgba(27,42,74,0.12); z-index: 390; max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .4s; }
 .mobile-menu.open { max-height: 520px; padding: 1.5rem 0 2rem; }
 .mobile-menu ul { list-style: none; display: flex; flex-direction: column; }
@@ -92,9 +76,6 @@ background: var(--offwhite); flex-shrink: 0; overflow: hidden;
 .menu-overlay { display: none; position: fixed; inset: 0; z-index: 380; background: rgba(27,42,74,0.3); opacity: 0; transition: opacity .3s; }
 .menu-overlay.open { opacity: 1; }
 
-/* ══════════════════════════════════
-HERO — split : blanc gauche / marine droite
-══════════════════════════════════ */
 .hero {
 padding-top: 74px;
 min-height: 100vh;
@@ -102,14 +83,12 @@ display: grid;
 grid-template-columns: 54% 46%;
 }
 
-/* Gauche : fond blanc très légèrement teinté */
 .hero-left {
 background: var(--white);
 padding: 8rem 6vw 6rem;
 display: flex; flex-direction: column; justify-content: center;
 position: relative;
 }
-/* Fine barre rouge verticale côté droit du bloc gauche */
 .hero-left::after {
 content: '';
 position: absolute; right: 0; top: 18%; bottom: 18%;
@@ -117,14 +96,12 @@ width: 2px; background: var(--red);
 border-radius: 2px;
 }
 
-/* Droite : fond marine profond */
 .hero-right {
 background: var(--navy);
 position: relative; overflow: hidden;
 display: flex; flex-direction: column; justify-content: center;
 padding: 6rem 5vw 6rem 5rem;
 }
-/* Grille subtile sur le marine */
 .hero-right::before {
 content: '';
 position: absolute; inset: 0;
@@ -134,7 +111,6 @@ linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
 background-size: 44px 44px;
 pointer-events: none;
 }
-/* Dégradé rouge discret en bas à droite */
 .hero-right::after {
 content: '';
 position: absolute; bottom: -80px; right: -80px;
@@ -143,12 +119,10 @@ background: radial-gradient(circle, rgba(200,16,46,0.18) 0%, transparent 70%);
 pointer-events: none;
 }
 
-/* ECG animé */
 .ecg-svg { position: absolute; bottom: 32px; left: 0; right: 0; height: 56px; opacity: 0.05; pointer-events: none; z-index: 0; }
 .ecg-path { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: ecgDraw 3.2s ease .6s forwards; }
 @keyframes ecgDraw { to { stroke-dashoffset: 0; } }
 
-/* Eyebrow tag */
 .eyebrow {
 display: inline-flex; align-items: center; gap: 0.65rem;
 font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700;
@@ -158,7 +132,6 @@ animation: fadeUp .6s ease both;
 }
 .eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
 
-/* H1 */
 .hero-h1 {
 font-family: 'Montserrat', sans-serif;
 font-size: clamp(2.8rem, 4.8vw, 5rem);
@@ -168,7 +141,6 @@ animation: fadeUp .6s .1s ease both;
 }
 .hero-h1 .accent { font-weight: 300; font-style: italic; color: var(--red); }
 
-/* Sous-titre */
 .hero-sub {
 font-size: 1rem; line-height: 1.9;
 color: var(--gray-text); font-weight: 300;
@@ -176,7 +148,6 @@ max-width: 430px; margin-bottom: 2.8rem;
 animation: fadeUp .6s .2s ease both;
 }
 
-/* Boutons */
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .6s .3s ease both; }
 
 .btn-red {
@@ -199,7 +170,6 @@ transition: all .2s;
 }
 .btn-ghost:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
-/* Stat cards sur fond marine */
 .stats-label {
 font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 600;
 letter-spacing: 0.32em; text-transform: uppercase;
@@ -220,15 +190,11 @@ transition: background .2s, transform .2s;
 .stat-num sup { font-size: 0.95rem; color: var(--red); }
 .stat-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-top: 0.55rem; }
 
-/* ══════════════════════════════════
-SECTIONS COMMUNES
-══════════════════════════════════ */
 .sec { padding: 8rem 6vw; }
 .sec-offwhite { background: var(--offwhite); }
 .sec-gray { background: var(--gray-bg); }
 .sec-navy { background: var(--navy); }
 
-/* Tag de section */
 .stag {
 display: inline-flex; align-items: center; gap: 0.65rem;
 font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
@@ -237,7 +203,6 @@ color: var(--red); margin-bottom: 0.9rem;
 }
 .stag::before { content: ''; width: 22px; height: 2px; background: var(--red); border-radius: 2px; }
 
-/* H2 */
 .sh2 {
 font-family: 'Montserrat', sans-serif;
 font-size: clamp(1.9rem, 3.2vw, 3rem);
@@ -246,13 +211,9 @@ color: var(--navy); margin-bottom: 1.3rem;
 }
 .sec-navy .sh2 { color: var(--white); }
 
-/* Lead */
 .slead { font-size: 1.02rem; line-height: 1.88; color: var(--gray-text); font-weight: 300; max-width: 500px; }
 .sec-navy .slead { color: rgba(255,255,255,0.48); }
 
-/* ══════════════════════════════════
-ENJEU
-══════════════════════════════════ */
 .enjeu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
 .enjeu-items { display: flex; flex-direction: column; gap: 0.8rem; }
 .enjeu-card {
@@ -267,9 +228,6 @@ transition: border-left-color .2s, transform .2s, box-shadow .2s;
 .enjeu-card:hover { border-left-color: var(--red); transform: translateX(5px); box-shadow: 0 4px 18px rgba(200,16,46,0.09); }
 .edot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 0.5rem; }
 
-/* ══════════════════════════════════
-PILIERS
-══════════════════════════════════ */
 .piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 4rem; }
 .pilier {
 background: var(--white);
@@ -302,9 +260,6 @@ font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 1rem;
 }
 .pilier p { font-size: 0.88rem; line-height: 1.8; color: var(--gray-text); font-weight: 300; }
 
-/* ══════════════════════════════════
-BANDEAU ROUGE
-══════════════════════════════════ */
 .red-band {
 background: var(--red);
 padding: 5.5rem 6vw;
@@ -333,9 +288,6 @@ transition: all .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.14);
 }
 .btn-wh:hover { background: var(--navy); color: var(--white); }
 
-/* ══════════════════════════════════
-PACKS
-══════════════════════════════════ */
 .packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 4rem; align-items: start; }
 .pack {
 background: var(--white);
@@ -346,7 +298,6 @@ transition: transform .25s, box-shadow .25s;
 }
 .pack:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(27,42,74,0.09); }
 
-/* Pack vedette : fond marine */
 .pack.feat {
 background: var(--navy);
 border-color: var(--navy);
@@ -385,9 +336,6 @@ cursor: pointer; border-radius: 3px; transition: all .2s; text-align: center;
 .pbtn-rd { background: var(--red); color: var(--white); border: none; box-shadow: 0 4px 16px rgba(200,16,46,0.32); }
 .pbtn-rd:hover { background: var(--red-dark); }
 
-/* ══════════════════════════════════
-PROCESSUS
-══════════════════════════════════ */
 .steps-wrap { margin-top: 4rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .steps-row { display: grid; grid-template-columns: repeat(5, 1fr); }
 .steps-row + .steps-row { border-top: 1px solid var(--line); }
@@ -407,9 +355,6 @@ letter-spacing: -0.02em;
 .step h4 { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--navy); margin-bottom: 0.45rem; }
 .step p { font-size: 0.76rem; color: var(--gray-text); line-height: 1.6; }
 
-/* ══════════════════════════════════
-ENGAGEMENTS — fond marine
-══════════════════════════════════ */
 .eng-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem; }
 .eng-card {
 background: rgba(255,255,255,0.045);
@@ -433,9 +378,6 @@ letter-spacing: -0.02em;
 .eng-card h4 { font-family: 'Montserrat', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; line-height: 1.35; }
 .eng-card p { font-size: 0.85rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
 
-/* ══════════════════════════════════
-CONTACT — fond gris clair
-══════════════════════════════════ */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.55fr; gap: 7rem; align-items: start; }
 .cinfo { display: flex; flex-direction: column; gap: 2.4rem; margin-top: 0.5rem; }
 .ci-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.55rem; }
@@ -459,9 +401,6 @@ box-shadow: 0 0 0 3px rgba(27,42,74,0.07);
 }
 .cform input::placeholder, .cform textarea::placeholder { color: #B2B9CE; }
 
-/* ══════════════════════════════════
-FOOTER — fond blanc, sobre
-══════════════════════════════════ */
 footer {
 background: var(--offwhite);
 border-top: 1px solid var(--line);
@@ -470,12 +409,7 @@ display: flex; align-items: center; justify-content: space-between;
 flex-wrap: wrap; gap: 1.5rem;
 }
 .foot-brand { display: flex; align-items: center; gap: 0.85rem; }
-.foot-logo {
-width: 34px; height: 34px; border: 1.5px dashed var(--gray-mid);
-border-radius: 4px; display: flex; align-items: center; justify-content: center;
-background: var(--white); overflow: hidden;
-}
-.foot-logo span { font-size: 0.4rem; color: var(--gray-text); font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; line-height: 1.3; text-transform: uppercase; }
+.foot-brand img { height: 34px; width: auto; object-fit: contain; }
 .foot-wm { font-family: 'Montserrat', sans-serif; font-size: 0.96rem; font-weight: 800; color: var(--navy); letter-spacing: 0.05em; }
 .foot-wm .xi { color: var(--red); }
 .foot-copy { font-size: 0.76rem; color: var(--gray-text); }
@@ -483,9 +417,6 @@ background: var(--white); overflow: hidden;
 .foot-links a { font-family: 'Montserrat', sans-serif; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-text); text-decoration: none; transition: color .2s; }
 .foot-links a:hover { color: var(--red); }
 
-/* ══════════════════════════════════
-ANIMATIONS
-══════════════════════════════════ */
 @keyframes fadeUp {
 from { opacity: 0; transform: translateY(22px); }
 to { opacity: 1; transform: translateY(0); }
@@ -493,9 +424,6 @@ to { opacity: 1; transform: translateY(0); }
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
-/* ══════════════════════════════════
-RESPONSIVE
-══════════════════════════════════ */
 @media (max-width: 980px) {
 .nav-links { display: none; }
 .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -515,9 +443,7 @@ RESPONSIVE
 .steps-row { grid-template-columns: 1fr; }
 .step { border-right: none; }
 }
-/* ══════════════════════════════════
-MODAL DEVIS
-══════════════════════════════════ */
+
 .modal-overlay {
 display: none; position: fixed; inset: 0; z-index: 999;
 background: rgba(27,42,74,0.6); backdrop-filter: blur(4px);
@@ -563,11 +489,7 @@ transition:border-color .2s, box-shadow .2s;
 <!-- ══════════ NAV ══════════ -->
 <nav>
 <div class="nav-brand">
-<!--
-VOTRE LOGO : remplacez .logo-slot par :
-<img src="logo.png" alt="MedBridgePlus" style="height:42px;width:auto;object-fit:contain;">
--->
-<div class="logo-slot"><span>Votre<br>Logo</span></div>
+<img src="logo.png" alt="MedBridgePlus">
 <span class="wordmark">MEDBRID<span class="xi">Ξ</span>PLUS</span>
 </div>
 
@@ -823,7 +745,7 @@ pour les entreprises, hôpitaux et autorités.
 </section>
 
 
-<!-- ══════════ ENGAGEMENTS — fond marine ══════════ -->
+<!-- ══════════ ENGAGEMENTS ══════════ -->
 <section class="sec sec-navy reveal">
 <div class="stag">Partenariats &amp; engagements</div>
 <h2 class="sh2">Des valeurs non négociables.</h2>
@@ -872,7 +794,7 @@ pour les entreprises, hôpitaux et autorités.
 <div class="c-hr"></div>
 <div>
 <div class="ci-lbl">Email &amp; Web</div>
-<div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e1828e8f95808295a18c8485839388858684918d9492cf8f8495">[email&#160;protected]</a><br><strong>www.medbridgeplus.net</strong></div>
+<div class="ci-val">contact@medbridgeplus.net<br><strong>www.medbridgeplus.net</strong></div>
 </div>
 </div>
 </div>
@@ -909,11 +831,7 @@ pour les entreprises, hôpitaux et autorités.
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
 <div class="foot-brand">
-<!--
-LOGO FOOTER : remplacez par :
-<img src="logo.png" alt="Logo" style="height:34px;width:auto;">
--->
-<div class="foot-logo"><span>Logo</span></div>
+<img src="logo.png" alt="MedBridgePlus">
 <span class="foot-wm">MEDBRID<span class="xi">Ξ</span>PLUS</span>
 </div>
 <div class="foot-copy">© 2025–2026 MEDBRIDΞPLUS (PTY) Ltd. · medbridgeplus.net</div>
@@ -970,22 +888,18 @@ LOGO FOOTER : remplacez par :
 
 
 <script>
-/* Scroll reveal */
 const io = new IntersectionObserver(entries => {
 entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* Nav shadow on scroll */
 window.addEventListener('scroll', () => {
 document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-/* Fermer modal avec Escape */
 document.addEventListener('keydown', e => {
 if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
 });
 </script>
 </body>
 </html>
-
