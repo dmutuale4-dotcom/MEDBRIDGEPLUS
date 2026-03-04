@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MEDBRIDΞPLUS – Coordination Médicale Internationale</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -556,14 +558,10 @@ transition:border-color .2s, box-shadow .2s;
 
 <!-- ══════════ NAV ══════════ -->
 <nav>
-<div class="nav-brand">
-<!--
-VOTRE LOGO : remplacez .logo-slot par :
+<a class="nav-brand" href="/" onclick="window.location.reload();return false;" style="text-decoration:none;display:flex;align-items:center;gap:1rem;cursor:pointer;">
 <img src="logo.png" alt="MedBridgePlus" style="height:70px;width:auto;object-fit:contain;">
--->
-<div class="logo-slot"><span>Votre<br>Logo</span></div>
 <span class="wordmark">MEDBRID<span class="xi">Ξ</span>PLUS</span>
-</div>
+</a>
 
 <ul class="nav-links">
 <li><a href="#apropos">À propos</a></li>
@@ -902,14 +900,10 @@ pour les entreprises, hôpitaux et autorités.
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-<div class="foot-brand">
-<!--
-LOGO FOOTER : remplacez par :
-<img src="logo.png" alt="Logo" style="height:70px;width:auto;">
--->
-<div class="foot-logo"><span>Logo</span></div>
+<a href="/" onclick="window.location.reload();return false;" class="foot-brand" style="text-decoration:none;cursor:pointer;">
+<img src="logo.png" alt="MedBridgePlus" style="height:70px;width:auto;object-fit:contain;">
 <span class="foot-wm">MEDBRID<span class="xi">Ξ</span>PLUS</span>
-</div>
+</a>
 <div class="foot-copy">© 2025–2026 MEDBRIDΞPLUS (PTY) Ltd. · medbridgeplus.net</div>
 <div class="foot-links">
 <a href="https://www.linkedin.com/company/medbridgeplus-pty-ltd/" target="_blank" rel="noopener">LinkedIn</a>
@@ -918,7 +912,9 @@ LOGO FOOTER : remplacez par :
 <a href="https://x.com/medbridg22?s=11&t=KiTvHMjeUvV2pzNb5k8zMQ" target="_blank" rel="noopener">Twitter / X</a>
 <a href="https://www.tiktok.com/@medbridgeplus22" target="_blank" rel="noopener">TikTok</a>
 <a href="https://whatsapp.com/channel/0029Vb71SvmJuyAEXSkl5P38" target="_blank" rel="noopener">WhatsApp</a>
-<a href="/cdn-cgi/l/email-protection#d9bab6b7adb8baad99b4bcbdbbabb0bdbebca9b5acaaf7b7bcad">Email</a>
+<a href="https://www.youtube.com/@medbridgeplus" target="_blank" rel="noopener">YouTube</a>
+<a href="https://www.reddit.com/u/HealthGrowthMind01/s/HcQHcBmpxi" target="_blank" rel="noopener">Reddit</a>
+<a href="mailto:dmutuale@medbridgeplus.net">Email</a>
 </div>
 </footer>
 
@@ -955,27 +951,51 @@ LOGO FOOTER : remplacez par :
 <option value="Pack Spécial – MedLink">Pack Spécial – MedLink (Télémédecine)</option>
 <option value="Je ne sais pas encore">Je ne sais pas encore — conseillez-moi</option>
 </select>
-<textarea rows="4" placeholder="Décrivez brièvement votre besoin ou situation médicale..."></textarea>
-<button class="modal-submit">Envoyer ma demande de devis →</button>
-<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; contact@medbridgeplus.net</div>
+<textarea id="devis-message" rows="4" placeholder="Décrivez brièvement votre besoin ou situation médicale..."></textarea>
+<button class="modal-submit" onclick="envoyerDevis()">Envoyer ma demande de devis →</button>
+<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; dmutuale@medbridgeplus.net</div>
 </div>
 </div>
 </div>
 
 
 <script>
-/* Scroll reveal */
+/* ── Envoi devis par email ── */
+function envoyerDevis() {
+const nom = document.querySelector('.modal-body input[type="text"]').value || '';
+const org = document.querySelectorAll('.modal-body input[type="text"]')[1]?.value || '';
+const email = document.querySelector('.modal-body input[type="email"]').value || '';
+const tel = document.querySelector('.modal-body input[type="tel"]').value || '';
+const struct = document.querySelector('.modal-body select:first-of-type')?.value || '';
+const pack = document.getElementById('devis-pack')?.value || '';
+const msg = document.getElementById('devis-message')?.value || '';
+
+const sujet = encodeURIComponent('Demande de devis – ' + (pack || 'MEDBRIDΞPLUS'));
+const corps = encodeURIComponent(
+'Nom : ' + nom + '\n' +
+'Organisation : ' + org + '\n' +
+'Email : ' + email + '\n' +
+'Téléphone : ' + tel + '\n' +
+'Type de structure : ' + struct + '\n' +
+'Pack souhaité : ' + pack + '\n\n' +
+'Message :\n' + msg
+);
+
+window.location.href = 'mailto:dmutuale@medbridgeplus.net?subject=' + sujet + '&body=' + corps;
+}
+
+/* ── Scroll reveal ── */
 const io = new IntersectionObserver(entries => {
 entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* Nav shadow on scroll */
+/* ── Nav shadow on scroll ── */
 window.addEventListener('scroll', () => {
 document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-/* Fermer modal avec Escape */
+/* ── Fermer modal avec Escape ── */
 document.addEventListener('keydown', e => {
 if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
 });
