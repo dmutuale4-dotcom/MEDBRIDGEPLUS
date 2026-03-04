@@ -963,46 +963,55 @@ pour les entreprises, hôpitaux et autorités.
 
 
 <script>
-/* ── Envoi devis par email ── */
-function envoyerDevis() {
-const nom = document.querySelector('.modal-body input[type="text"]').value || '';
-const org = document.querySelectorAll('.modal-body input[type="text"]')[1]?.value || '';
-const email = document.querySelector('.modal-body input[type="email"]').value || '';
-const tel = document.querySelector('.modal-body input[type="tel"]').value || '';
-const struct = document.querySelector('.modal-body select:first-of-type')?.value || '';
-const pack = document.getElementById('devis-pack')?.value || '';
-const msg = document.getElementById('devis-message')?.value || '';
+async function envoyerDevis() {
+var form = document.getElementById('devis-form');
+var btn = document.getElementById('devis-btn');
+var nom = form.querySelector('input[name="nom"]').value.trim();
+var email = form.querySelector('input[name="email"]').value.trim();
 
-const sujet = encodeURIComponent('Demande de devis – ' + (pack || 'MEDBRIDΞPLUS'));
-const corps = encodeURIComponent(
-'Nom : ' + nom + '\n' +
-'Organisation : ' + org + '\n' +
-'Email : ' + email + '\n' +
-'Téléphone : ' + tel + '\n' +
-'Type de structure : ' + struct + '\n' +
-'Pack souhaité : ' + pack + '\n\n' +
-'Message :\n' + msg
-);
-
-window.location.href = 'mailto:dmutuale@medbridgeplus.net?subject=' + sujet + '&body=' + corps;
+if (!nom || !email) {
+alert('Veuillez remplir votre Nom et votre Email.');
+return;
 }
 
-/* ── Scroll reveal ── */
-const io = new IntersectionObserver(entries => {
-entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+btn.textContent = 'Envoi en cours...';
+btn.disabled = true;
 
-/* ── Nav shadow on scroll ── */
-window.addEventListener('scroll', () => {
+fetch('https://formspree.io/f/mgolgnew', {
+method: 'POST',
+body: new FormData(form),
+headers: { 'Accept': 'application/json' }
+}).then(function(res) {
+if (res.ok) {
+form.style.display = 'none';
+document.getElementById('devis-success').style.display = 'block';
+form.reset();
+} else {
+alert('Erreur. Contactez-nous : dmutuale@medbridgeplus.net');
+btn.textContent = 'Envoyer ma demande de devis';
+btn.disabled = false;
+}
+}).catch(function() {
+alert('Erreur reseau. Verifiez votre connexion.');
+btn.textContent = 'Envoyer ma demande de devis';
+btn.disabled = false;
+});
+}
+
+var io = new IntersectionObserver(function(entries) {
+entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+window.addEventListener('scroll', function() {
 document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-/* ── Fermer modal avec Escape ── */
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e) {
 if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
 });
 </script>
 </body>
 </html>
+
 
