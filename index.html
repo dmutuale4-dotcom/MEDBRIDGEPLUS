@@ -3,216 +3,982 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MEDBRIDGΞPLUS | Coordination Médicale Internationale</title>
-
+<title>MEDBRIDΞPLUS – Coordination Médicale Internationale</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-color:#1f2d3d;
-scroll-behavior:smooth;
+:root {
+--red: #C8102E;
+--red-dark: #9B0C22;
+--red-pale: #FEF0F2;
+--navy: #1B2A4A;
+--navy-mid: #243660;
+--white: #FFFFFF;
+--offwhite: #F7F9FC;
+--gray-bg: #EEF1F8;
+--gray-card: #E4E8F2;
+--gray-text: #5A6480;
+--gray-mid: #C8CEDF;
+--line: #DDE1EE;
+--text: #1B2A4A;
 }
 
-/* NAVBAR */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Lato', sans-serif;
+background: var(--white);
+color: var(--text);
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--red); }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 60px;
-background:white;
-box-shadow:0 2px 6px rgba(0,0,0,0.05);
-position:fixed;
-width:100%;
-top:0;
-z-index:1000;
+/* ══════════════════════════════════
+NAV — fond blanc, sobre
+══════════════════════════════════ */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+height: 74px;
+background: var(--white);
+border-bottom: 1px solid var(--line);
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 6vw;
+box-shadow: 0 2px 24px rgba(27,42,74,0.06);
+}
+.nav-brand { display: flex; align-items: center; gap: 1rem; }
+.logo-slot {
+width: 70px; height: 70px;
+border: 1.5px dashed var(--gray-mid);
+border-radius: 6px;
+display: flex; align-items: center; justify-content: center;
+background: var(--offwhite); flex-shrink: 0; overflow: hidden;
+}
+.logo-slot span { font-size: 0.43rem; color: var(--gray-text); font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; line-height: 1.35; text-transform: uppercase; }
+.wordmark { font-family: 'Montserrat', sans-serif; font-size: 1.12rem; font-weight: 800; letter-spacing: 0.06em; color: var(--navy); user-select: none; }
+.wordmark .xi { color: var(--red); }
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-text); text-decoration: none; padding-bottom: 3px; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.nav-links a:hover { color: var(--navy); border-bottom-color: var(--red); }
+.nav-cta { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; background: var(--navy); color: var(--white); border: none; padding: 0.68rem 1.7rem; cursor: pointer; border-radius: 3px; transition: background .2s, transform .15s; }
+.nav-cta:hover { background: var(--red); transform: translateY(-1px); }
+
+/* HAMBURGER BUTTON */
+.hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 6px; transition: background .2s; -webkit-tap-highlight-color: transparent; }
+.hamburger:hover { background: var(--offwhite); }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform .3s ease, opacity .3s ease, width .3s ease; transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MENU MOBILE DRAWER */
+.mobile-menu { display: none; position: fixed; top: 74px; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--line); border-bottom: 3px solid var(--red); box-shadow: 0 8px 32px rgba(27,42,74,0.12); z-index: 390; max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .4s; }
+.mobile-menu.open { max-height: 520px; padding: 1.5rem 0 2rem; }
+.mobile-menu ul { list-style: none; display: flex; flex-direction: column; }
+.mobile-menu ul li a { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-text); text-decoration: none; padding: 1rem 6vw; border-left: 3px solid transparent; transition: color .2s, border-color .2s, background .2s; }
+.mobile-menu ul li a:hover { color: var(--navy); border-left-color: var(--red); background: var(--offwhite); }
+.mobile-menu-sep { height: 1px; background: var(--line); margin: 0.8rem 6vw; }
+.mobile-cta { margin: 0.5rem 6vw 0; display: block; font-family: 'Montserrat', sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: var(--red); color: var(--white); border: none; padding: 1rem; cursor: pointer; border-radius: 4px; width: calc(100% - 12vw); text-align: center; transition: background .2s; box-shadow: 0 4px 14px rgba(200,16,46,0.28); }
+.mobile-cta:hover { background: var(--red-dark); }
+.mobile-contact { margin: 1.4rem 6vw 0; padding: 1.2rem 1.4rem; background: var(--offwhite); border-radius: 8px; border: 1px solid var(--line); }
+.mobile-contact p { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+.mobile-contact a { display: block; font-size: 0.84rem; color: var(--navy); font-weight: 700; text-decoration: none; line-height: 1.8; }
+.menu-overlay { display: none; position: fixed; inset: 0; z-index: 380; background: rgba(27,42,74,0.3); opacity: 0; transition: opacity .3s; }
+.menu-overlay.open { opacity: 1; }
+
+/* ══════════════════════════════════
+HERO — split : blanc gauche / marine droite
+══════════════════════════════════ */
+.hero {
+padding-top: 74px;
+min-height: 100vh;
+display: grid;
+grid-template-columns: 54% 46%;
 }
 
-.logo{
-font-weight:bold;
-font-size:20px;
-color:#0a2a4a;
+/* Gauche : fond blanc très légèrement teinté */
+.hero-left {
+background: var(--white);
+padding: 8rem 6vw 6rem;
+display: flex; flex-direction: column; justify-content: center;
+position: relative;
+}
+/* Fine barre rouge verticale côté droit du bloc gauche */
+.hero-left::after {
+content: '';
+position: absolute; right: 0; top: 18%; bottom: 18%;
+width: 2px; background: var(--red);
+border-radius: 2px;
 }
 
-nav ul{
-list-style:none;
-display:flex;
-gap:25px;
+/* Droite : fond marine profond */
+.hero-right {
+background: var(--navy);
+position: relative; overflow: hidden;
+display: flex; flex-direction: column; justify-content: center;
+padding: 6rem 5vw 6rem 5rem;
+}
+/* Grille subtile sur le marine */
+.hero-right::before {
+content: '';
+position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+background-size: 44px 44px;
+pointer-events: none;
+}
+/* Dégradé rouge discret en bas à droite */
+.hero-right::after {
+content: '';
+position: absolute; bottom: -80px; right: -80px;
+width: 280px; height: 280px;
+background: radial-gradient(circle, rgba(200,16,46,0.18) 0%, transparent 70%);
+pointer-events: none;
 }
 
-nav a{
-text-decoration:none;
-color:#333;
-font-weight:500;
+/* ECG animé */
+.ecg-svg { position: absolute; bottom: 32px; left: 0; right: 0; height: 56px; opacity: 0.05; pointer-events: none; z-index: 0; }
+.ecg-path { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: ecgDraw 3.2s ease .6s forwards; }
+@keyframes ecgDraw { to { stroke-dashoffset: 0; } }
+
+/* Eyebrow tag */
+.eyebrow {
+display: inline-flex; align-items: center; gap: 0.65rem;
+font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700;
+letter-spacing: 0.3em; text-transform: uppercase; color: var(--red);
+margin-bottom: 1.8rem;
+animation: fadeUp .6s ease both;
+}
+.eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
+
+/* H1 */
+.hero-h1 {
+font-family: 'Montserrat', sans-serif;
+font-size: clamp(2.8rem, 4.8vw, 5rem);
+font-weight: 800; line-height: 1.06;
+color: var(--navy); margin-bottom: 1.8rem;
+animation: fadeUp .6s .1s ease both;
+}
+.hero-h1 .accent { font-weight: 300; font-style: italic; color: var(--red); }
+
+/* Sous-titre */
+.hero-sub {
+font-size: 1rem; line-height: 1.9;
+color: var(--gray-text); font-weight: 300;
+max-width: 430px; margin-bottom: 2.8rem;
+animation: fadeUp .6s .2s ease both;
 }
 
-.cta{
-background:#0a2a4a;
-color:white;
-padding:10px 18px;
-border-radius:4px;
+/* Boutons */
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .6s .3s ease both; }
+
+.btn-red {
+font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700;
+letter-spacing: 0.13em; text-transform: uppercase;
+background: var(--red); color: var(--white); border: none;
+padding: 1rem 2.5rem; cursor: pointer; border-radius: 3px;
+transition: background .2s, transform .15s;
+box-shadow: 0 6px 22px rgba(200,16,46,0.3);
 }
+.btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
 
-/* SECTIONS */
-
-section{
-padding:120px 60px;
-min-height:100vh;
+.btn-ghost {
+font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700;
+letter-spacing: 0.13em; text-transform: uppercase;
+background: transparent; color: var(--navy);
+border: 1.5px solid var(--line);
+padding: 0.98rem 2.3rem; cursor: pointer; border-radius: 3px;
+transition: all .2s;
 }
+.btn-ghost:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
-.hero{
-background:#f5f7fa;
+/* Stat cards sur fond marine */
+.stats-label {
+font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 600;
+letter-spacing: 0.32em; text-transform: uppercase;
+color: rgba(255,255,255,0.28); margin-bottom: 1.8rem;
+position: relative; z-index: 1;
 }
-
-h1{
-color:#0a2a4a;
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; position: relative; z-index: 1; }
+.stat-card {
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.09);
+border-top: 2px solid var(--red);
+border-radius: 10px; padding: 1.6rem 1.5rem;
+transition: background .2s, transform .2s;
 }
+.stat-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+.stat-icon { font-size: 1.4rem; margin-bottom: 0.9rem; opacity: 0.8; }
+.stat-num { font-family: 'Montserrat', sans-serif; font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; }
+.stat-num sup { font-size: 0.95rem; color: var(--red); }
+.stat-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-top: 0.55rem; }
 
-.card{
-background:white;
-padding:25px;
-margin-top:20px;
-border-radius:6px;
-box-shadow:0 3px 10px rgba(0,0,0,0.05);
+/* ══════════════════════════════════
+SECTIONS COMMUNES
+══════════════════════════════════ */
+.sec { padding: 8rem 6vw; }
+.sec-offwhite { background: var(--offwhite); }
+.sec-gray { background: var(--gray-bg); }
+.sec-navy { background: var(--navy); }
+
+/* Tag de section */
+.stag {
+display: inline-flex; align-items: center; gap: 0.65rem;
+font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
+font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase;
+color: var(--red); margin-bottom: 0.9rem;
 }
+.stag::before { content: ''; width: 22px; height: 2px; background: var(--red); border-radius: 2px; }
 
-footer{
-background:#0a2a4a;
-color:white;
-text-align:center;
-padding:30px;
+/* H2 */
+.sh2 {
+font-family: 'Montserrat', sans-serif;
+font-size: clamp(1.9rem, 3.2vw, 3rem);
+font-weight: 800; line-height: 1.15;
+color: var(--navy); margin-bottom: 1.3rem;
 }
+.sec-navy .sh2 { color: var(--white); }
 
+/* Lead */
+.slead { font-size: 1.02rem; line-height: 1.88; color: var(--gray-text); font-weight: 300; max-width: 500px; }
+.sec-navy .slead { color: rgba(255,255,255,0.48); }
+
+/* ══════════════════════════════════
+ENJEU
+══════════════════════════════════ */
+.enjeu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
+.enjeu-items { display: flex; flex-direction: column; gap: 0.8rem; }
+.enjeu-card {
+display: flex; align-items: flex-start; gap: 1.1rem;
+background: var(--white);
+border: 1px solid var(--line); border-left: 3px solid transparent;
+border-radius: 8px; padding: 1.25rem 1.5rem;
+font-size: 0.91rem; line-height: 1.65; color: var(--text);
+box-shadow: 0 1px 6px rgba(27,42,74,0.04);
+transition: border-left-color .2s, transform .2s, box-shadow .2s;
+}
+.enjeu-card:hover { border-left-color: var(--red); transform: translateX(5px); box-shadow: 0 4px 18px rgba(200,16,46,0.09); }
+.edot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 0.5rem; }
+
+/* ══════════════════════════════════
+PILIERS
+══════════════════════════════════ */
+.piliers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 4rem; }
+.pilier {
+background: var(--white);
+border: 1px solid var(--line); border-radius: 12px;
+padding: 2.8rem 2.2rem;
+position: relative; overflow: hidden;
+transition: transform .25s, box-shadow .25s;
+}
+.pilier::before {
+content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+background: var(--gray-card);
+transition: background .3s;
+}
+.pilier:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(27,42,74,0.11); }
+.pilier:hover::before { background: var(--red); }
+
+.p-num {
+font-family: 'Montserrat', sans-serif; font-size: 4rem; font-weight: 900;
+color: var(--gray-bg); line-height: 1; margin-bottom: 1.3rem;
+letter-spacing: -0.03em;
+}
+.p-code {
+font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
+font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase;
+color: var(--red); margin-bottom: 0.55rem;
+}
+.pilier h3 {
+font-family: 'Montserrat', sans-serif; font-size: 1.02rem;
+font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 1rem;
+}
+.pilier p { font-size: 0.88rem; line-height: 1.8; color: var(--gray-text); font-weight: 300; }
+
+/* ══════════════════════════════════
+BANDEAU ROUGE
+══════════════════════════════════ */
+.red-band {
+background: var(--red);
+padding: 5.5rem 6vw;
+position: relative; overflow: hidden;
+}
+.red-band::after {
+content: '';
+position: absolute; top: 0; right: 0; bottom: 0; width: 45%;
+background: rgba(255,255,255,0.03);
+clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%);
+}
+.red-band-in { display: flex; align-items: center; justify-content: space-between; gap: 4rem; position: relative; z-index: 1; }
+.red-band h2 {
+font-family: 'Montserrat', sans-serif;
+font-size: clamp(1.55rem, 2.6vw, 2.5rem);
+font-weight: 800; color: var(--white); line-height: 1.3; max-width: 600px;
+}
+.red-band h2 em { font-style: italic; font-weight: 300; color: rgba(255,255,255,0.7); }
+.btn-wh {
+font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 700;
+letter-spacing: 0.13em; text-transform: uppercase;
+background: var(--white); color: var(--red);
+border: none; padding: 1.05rem 2.8rem; cursor: pointer; border-radius: 3px;
+white-space: nowrap; flex-shrink: 0;
+transition: all .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+}
+.btn-wh:hover { background: var(--navy); color: var(--white); }
+
+/* ══════════════════════════════════
+PACKS
+══════════════════════════════════ */
+.packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 4rem; align-items: start; }
+.pack {
+background: var(--white);
+border: 1px solid var(--line); border-radius: 12px;
+padding: 2.8rem 2.2rem;
+display: flex; flex-direction: column; position: relative;
+transition: transform .25s, box-shadow .25s;
+}
+.pack:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(27,42,74,0.09); }
+
+/* Pack vedette : fond marine */
+.pack.feat {
+background: var(--navy);
+border-color: var(--navy);
+box-shadow: 0 10px 36px rgba(27,42,74,0.22);
+}
+.pack.feat:hover { transform: translateY(-7px); box-shadow: 0 18px 50px rgba(27,42,74,0.28); }
+
+.pack-badge {
+position: absolute; top: -1px; left: 2rem;
+background: var(--red); color: var(--white);
+font-family: 'Montserrat', sans-serif; font-size: 0.52rem;
+font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+padding: 0.28rem 1rem; border-radius: 0 0 6px 6px;
+}
+.pack-tier { font-family: 'Montserrat', sans-serif; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+.pack.feat .pack-tier { color: rgba(200,16,46,0.75); }
+.pack-name { font-family: 'Montserrat', sans-serif; font-size: 1.45rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 0.35rem; }
+.pack.feat .pack-name { color: var(--white); }
+.pack-sub { font-size: 0.81rem; color: var(--gray-text); margin-bottom: 2rem; }
+.pack.feat .pack-sub { color: rgba(255,255,255,0.38); }
+.pack-hr { height: 1px; background: var(--line); margin-bottom: 2rem; }
+.pack.feat .pack-hr { background: rgba(255,255,255,0.1); }
+.pack-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 0.85rem; }
+.pack-list li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.88rem; color: var(--text); line-height: 1.55; }
+.pack.feat .pack-list li { color: rgba(255,255,255,0.78); }
+.ck { color: var(--red); font-weight: 900; flex-shrink: 0; }
+.pack.feat .ck { color: #FF7A90; }
+.pack-btn {
+margin-top: 2.2rem; padding: 0.92rem;
+font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+cursor: pointer; border-radius: 3px; transition: all .2s; text-align: center;
+}
+.pbtn-ol { background: transparent; border: 1.5px solid var(--line); color: var(--navy); }
+.pbtn-ol:hover { border-color: var(--navy); background: var(--navy); color: var(--white); }
+.pbtn-rd { background: var(--red); color: var(--white); border: none; box-shadow: 0 4px 16px rgba(200,16,46,0.32); }
+.pbtn-rd:hover { background: var(--red-dark); }
+
+/* ══════════════════════════════════
+PROCESSUS
+══════════════════════════════════ */
+.steps-wrap { margin-top: 4rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.steps-row { display: grid; grid-template-columns: repeat(5, 1fr); }
+.steps-row + .steps-row { border-top: 1px solid var(--line); }
+.step {
+padding: 2.2rem 1.7rem; border-right: 1px solid var(--line);
+background: var(--white); transition: background .2s;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: var(--offwhite); }
+.step:hover .snum { color: var(--red); }
+.snum {
+font-family: 'Montserrat', sans-serif; font-size: 2.2rem;
+font-weight: 900; color: var(--gray-card); line-height: 1;
+margin-bottom: 1rem; transition: color .25s;
+letter-spacing: -0.02em;
+}
+.step h4 { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--navy); margin-bottom: 0.45rem; }
+.step p { font-size: 0.76rem; color: var(--gray-text); line-height: 1.6; }
+
+/* ══════════════════════════════════
+ENGAGEMENTS — fond marine
+══════════════════════════════════ */
+.eng-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem; }
+.eng-card {
+background: rgba(255,255,255,0.045);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 12px; padding: 2.4rem 1.9rem;
+position: relative; overflow: hidden;
+transition: background .25s, transform .25s;
+}
+.eng-card::after {
+content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+background: var(--red); transform: scaleX(0); transform-origin: left;
+transition: transform .35s;
+}
+.eng-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.eng-card:hover::after { transform: scaleX(1); }
+.eng-n {
+font-family: 'Montserrat', sans-serif; font-size: 3.2rem; font-weight: 900;
+color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 1.1rem;
+letter-spacing: -0.02em;
+}
+.eng-card h4 { font-family: 'Montserrat', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; line-height: 1.35; }
+.eng-card p { font-size: 0.85rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+
+/* ══════════════════════════════════
+CONTACT — fond gris clair
+══════════════════════════════════ */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.55fr; gap: 7rem; align-items: start; }
+.cinfo { display: flex; flex-direction: column; gap: 2.4rem; margin-top: 0.5rem; }
+.ci-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.55rem; }
+.ci-val { font-size: 0.92rem; color: var(--text); line-height: 1.85; }
+.ci-val strong { font-weight: 700; color: var(--navy); }
+.c-hr { height: 1px; background: var(--line); }
+
+.cform { display: flex; flex-direction: column; gap: 0.95rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.95rem; }
+.cform input, .cform select, .cform textarea {
+font-family: 'Lato', sans-serif; font-size: 0.9rem;
+background: var(--white); border: 1px solid var(--line);
+border-radius: 6px; color: var(--text);
+padding: 0.95rem 1.2rem; outline: none; resize: none;
+transition: border-color .2s, box-shadow .2s;
+-webkit-appearance: none; appearance: none;
+}
+.cform input:focus, .cform select:focus, .cform textarea:focus {
+border-color: var(--navy);
+box-shadow: 0 0 0 3px rgba(27,42,74,0.07);
+}
+.cform input::placeholder, .cform textarea::placeholder { color: #B2B9CE; }
+
+/* ══════════════════════════════════
+FOOTER — fond blanc, sobre
+══════════════════════════════════ */
+footer {
+background: var(--offwhite);
+border-top: 1px solid var(--line);
+padding: 3.2rem 6vw;
+display: flex; align-items: center; justify-content: space-between;
+flex-wrap: wrap; gap: 1.5rem;
+}
+.foot-brand { display: flex; align-items: center; gap: 0.85rem; }
+.foot-logo {
+width: 70px; height: 70px; border: 1.5px dashed var(--gray-mid);
+border-radius: 4px; display: flex; align-items: center; justify-content: center;
+background: var(--white); overflow: hidden;
+}
+.foot-logo span { font-size: 0.4rem; color: var(--gray-text); font-family: 'Montserrat', sans-serif; font-weight: 600; text-align: center; line-height: 1.3; text-transform: uppercase; }
+.foot-wm { font-family: 'Montserrat', sans-serif; font-size: 0.96rem; font-weight: 800; color: var(--navy); letter-spacing: 0.05em; }
+.foot-wm .xi { color: var(--red); }
+.foot-copy { font-size: 0.76rem; color: var(--gray-text); }
+.foot-links { display: flex; gap: 2rem; }
+.foot-links a { font-family: 'Montserrat', sans-serif; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-text); text-decoration: none; transition: color .2s; }
+.foot-links a:hover { color: var(--red); }
+
+/* ══════════════════════════════════
+ANIMATIONS
+══════════════════════════════════ */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(22px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ══════════════════════════════════
+RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 980px) {
+.nav-links { display: none; }
+.hero { grid-template-columns: 1fr; min-height: auto; }
+.hero-left::after { display: none; }
+.hero-right { padding: 4rem 5vw; min-height: 360px; }
+.enjeu-grid, .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+.piliers-grid, .packs-grid { grid-template-columns: 1fr; }
+.eng-grid { grid-template-columns: repeat(2, 1fr); }
+.steps-row { grid-template-columns: repeat(2, 1fr); }
+.step:nth-child(2n) { border-right: none; }
+.red-band-in { flex-direction: column; gap: 2.5rem; }
+}
+@media (max-width: 560px) {
+.stat-grid { grid-template-columns: 1fr 1fr; }
+.eng-grid { grid-template-columns: 1fr; }
+.form-row { grid-template-columns: 1fr; }
+.steps-row { grid-template-columns: 1fr; }
+.step { border-right: none; }
+}
+/* ══════════════════════════════════
+MODAL DEVIS
+══════════════════════════════════ */
+.modal-overlay {
+display: none; position: fixed; inset: 0; z-index: 999;
+background: rgba(27,42,74,0.6); backdrop-filter: blur(4px);
+align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-box {
+background: var(--white); border-radius: 16px;
+width: 100%; max-width: 600px; max-height: 90vh;
+overflow-y: auto; position: relative;
+box-shadow: 0 24px 60px rgba(27,42,74,0.25);
+animation: modalIn .3s ease;
+}
+@keyframes modalIn { from { opacity:0; transform: scale(.96) translateY(16px); } to { opacity:1; transform: scale(1) translateY(0); } }
+.modal-head {
+background: var(--navy); padding: 2.2rem 2.5rem 2rem;
+border-radius: 16px 16px 0 0; position: relative;
+}
+.modal-head::after { content:''; position:absolute; bottom:0; left:2.5rem; right:2.5rem; height:2px; background: var(--red); }
+.modal-tag { font-family:'Montserrat',sans-serif; font-size:0.58rem; font-weight:700; letter-spacing:0.32em; text-transform:uppercase; color:var(--red); margin-bottom:0.5rem; }
+.modal-title { font-family:'Montserrat',sans-serif; font-size:1.4rem; font-weight:800; color:var(--white); line-height:1.25; }
+.modal-close { position:absolute; top:1.5rem; right:1.5rem; background:rgba(255,255,255,0.1); border:none; color:var(--white); width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; line-height:1; }
+.modal-close:hover { background:var(--red); }
+.modal-body { padding: 2.2rem 2.5rem 2.5rem; display:flex; flex-direction:column; gap:1rem; }
+.modal-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.modal-body input, .modal-body select, .modal-body textarea {
+font-family:'Lato',sans-serif; font-size:0.9rem;
+background:var(--offwhite); border:1px solid var(--line);
+border-radius:6px; color:var(--text);
+padding:0.9rem 1.1rem; outline:none; resize:none;
+transition:border-color .2s, box-shadow .2s;
+-webkit-appearance:none; appearance:none; width:100%;
+}
+.modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus { border-color:var(--navy); box-shadow:0 0 0 3px rgba(27,42,74,0.08); }
+.modal-body input::placeholder, .modal-body textarea::placeholder { color:#B2B9CE; }
+.modal-submit { background:var(--red); color:var(--white); border:none; padding:1.05rem; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; transition:background .2s; box-shadow:0 4px 16px rgba(200,16,46,0.3); margin-top:0.5rem; }
+.modal-submit:hover { background:var(--red-dark); }
+.modal-note { font-size:0.78rem; color:var(--gray-text); text-align:center; line-height:1.6; }
+@media(max-width:560px) { .modal-row { grid-template-columns:1fr; } .modal-head, .modal-body { padding-left:1.5rem; padding-right:1.5rem; } }
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
+<!-- ══════════ NAV ══════════ -->
 <nav>
-<div class="logo">MEDBRIDGΞPLUS</div>
+<div class="nav-brand">
+<!--
+VOTRE LOGO : remplacez .logo-slot par :
+<img src="logo.png" alt="MedBridgePlus" style="height:70px;width:auto;object-fit:contain;">
+-->
+<div class="logo-slot"><span>Votre<br>Logo</span></div>
+<span class="wordmark">MEDBRID<span class="xi">Ξ</span>PLUS</span>
+</div>
 
-<ul>
+<ul class="nav-links">
 <li><a href="#apropos">À propos</a></li>
 <li><a href="#enjeu">Enjeu</a></li>
 <li><a href="#services">Services</a></li>
-<li><a href="#offres">Offres</a></li>
+<li><a href="#packs">Offres</a></li>
 <li><a href="#processus">Processus</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 
-<a class="cta" href="#contact">Demander un devis</a>
+<button class="nav-cta" onclick="document.getElementById('devis-modal').style.display='flex'">
+Demander un devis
+</button>
 </nav>
 
-<!-- HERO -->
 
+<!-- ══════════ HERO ══════════ -->
 <section class="hero">
-<h1>Plateforme de Coordination Médicale Internationale</h1>
-<p>
-Hub Afrique du Sud – Bureau de liaison RDC.
-MEDBRIDGΞPLUS facilite l’accès aux soins spécialisés
-grâce à une coordination médicale sécurisée,
-transparente et digitalisée.
+
+<svg class="ecg-svg" viewBox="0 0 1440 56" preserveAspectRatio="none">
+<polyline class="ecg-path"
+points="0,28 70,28 100,4 130,52 160,14 190,28 360,28 390,28 420,6 450,50 480,18 510,28 680,28 710,28 740,5 770,51 800,16 830,28 1000,28 1030,28 1060,7 1090,49 1120,17 1150,28 1320,28 1350,28 1380,10 1410,46 1440,28"
+stroke="#C8102E" stroke-width="1.5" fill="none"/>
+</svg>
+
+<div class="hero-left">
+<div class="eyebrow">Plateforme Médicale Internationale · Hub Afrique du Sud · Bureau RDC</div>
+
+<h1 class="hero-h1">
+La santé comme<br>
+<span class="accent">infrastructure</span><br>
+stratégique.
+</h1>
+
+<p class="hero-sub">
+Coordination médicale internationale digitalisée, transparente et fiable.
+Entreprises, hôpitaux, autorités — nous sécurisons chaque parcours patient,
+du signalement à l'archivage final.
 </p>
-</section>
 
-<!-- A PROPOS -->
+<div class="hero-btns">
+<button class="btn-red" onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">
+Découvrir nos services
+</button>
+<button class="btn-ghost" onclick="document.getElementById('devis-modal').style.display='flex'">
+Demander un devis
+</button>
+</div>
+</div>
 
-<section id="apropos">
-<h1>À propos</h1>
-
-<div class="card">
-MEDBRIDGΞPLUS agit comme un pont médical structuré entre
-l’Afrique centrale et l’Afrique du Sud,
-permettant aux patients, entreprises et institutions
-d’accéder rapidement à des soins spécialisés internationaux.
+<div class="hero-right">
+<div class="stats-label">Indicateurs clés</div>
+<div class="stat-grid">
+<div class="stat-card">
+<div class="stat-icon">🕐</div>
+<div class="stat-num">24<sup>/7</sup></div>
+<div class="stat-lbl">Disponibilité</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon">🏥</div>
+<div class="stat-num">3</div>
+<div class="stat-lbl">Piliers stratégiques</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon">📋</div>
+<div class="stat-num">10</div>
+<div class="stat-lbl">Étapes structurées</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon">🌍</div>
+<div class="stat-num" style="font-size:1.6rem;line-height:1.25">Multi</div>
+<div class="stat-lbl">Continental</div>
+</div>
+</div>
 </div>
 
 </section>
 
-<!-- ENJEU -->
 
-<section id="enjeu">
-<h1>Notre Enjeu</h1>
-
-<div class="card">
-Réduire les délais de prise en charge,
-sécuriser les évacuations médicales
-et garantir une continuité de soins fiable
-grâce à une coordination centralisée.
+<!-- ══════════ À PROPOS ══════════ -->
+<section class="sec sec-navy reveal" id="apropos">
+<div class="stag">À propos</div>
+<h2 class="sh2">Qui sommes-nous ?</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;">
+<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-top:3px solid var(--red);border-radius:12px;padding:2.6rem 2.2rem;">
+<div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem;">Notre Vision</div>
+<h3 style="font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1.35;margin-bottom:1.1rem;">Faire de la coordination médicale internationale un droit accessible à tous.</h3>
+<p style="font-size:0.9rem;line-height:1.85;color:rgba(255,255,255,0.5);font-weight:300;">Nous croyons qu'aucune frontière ne devrait empêcher un patient d'accéder aux soins dont il a besoin. MEDBRIDΞPLUS est né de la conviction que la technologie peut transformer la coordination médicale en un système transparent, traçable et humain — au service des patients, des entreprises et des institutions.</p>
 </div>
-
+<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-top:3px solid var(--red);border-radius:12px;padding:2.6rem 2.2rem;">
+<div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem;">Notre Mission</div>
+<h3 style="font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1.35;margin-bottom:1.1rem;">Structurer et digitaliser chaque étape du parcours médical international.</h3>
+<p style="font-size:0.9rem;line-height:1.85;color:rgba(255,255,255,0.5);font-weight:300;">Notre mission est de devenir le partenaire de référence en Afrique pour la coordination médicale internationale — en offrant une plateforme digitale intégrée qui gère l'évacuation médicale, la télémédecine et la traçabilité des dossiers, avec rigueur, éthique et efficacité.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem;">
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">🌍</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Présence continentale</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Hub opérationnel en Afrique du Sud, bureau en RDC, expansion vers l'Europe et l'Asie.</p></div>
+</div>
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">🔐</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Standards internationaux</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Conformité aux normes médicales et de confidentialité les plus exigeantes au monde.</p></div>
+</div>
+<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
+<span style="font-size:1.6rem;flex-shrink:0;">💡</span>
+<div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Innovation médicale</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Plateforme numérique propriétaire conçue pour la rapidité, la traçabilité et la fiabilité.</p></div>
+</div>
+</div>
 </section>
 
-<!-- SERVICES -->
 
-<section id="services">
-<h1>Services</h1>
-
-<div class="card">
-✔ Coordination médicale internationale<br>
-✔ Évacuation médicale programmée et urgente<br>
-✔ Deuxième avis médical<br>
-✔ Suivi patient en Afrique du Sud<br>
-✔ Assistance administrative et logistique
+<!-- ══════════ ENJEU ══════════ -->
+<section class="sec sec-offwhite reveal" id="enjeu">
+<div class="enjeu-grid">
+<div>
+<div class="stag">Enjeu stratégique</div>
+<h2 class="sh2">Une évacuation mal organisée coûte plus que sa coordination.</h2>
+<p class="slead">
+Désorganisation, coûts imprévisibles, manque de traçabilité, risques institutionnels.
+MEDBRIDΞPLUS apporte une solution médicale structurée et professionnelle
+pour les entreprises, hôpitaux et autorités.
+</p>
 </div>
-
+<div class="enjeu-items">
+<div class="enjeu-card"><span class="edot"></span><span>Les pathologies complexes nécessitent des soins spécialisés à l'international</span></div>
+<div class="enjeu-card"><span class="edot"></span><span>Les entreprises doivent protéger leurs talents stratégiques</span></div>
+<div class="enjeu-card"><span class="edot"></span><span>Les structures médicales cherchent à améliorer leur coordination</span></div>
+<div class="enjeu-card"><span class="edot"></span><span>Les États souhaitent encadrer les évacuations médicales avec traçabilité</span></div>
+<div class="enjeu-card"><span class="edot"></span><span>Les systèmes numériques propriétaires garantissent efficacité et responsabilité</span></div>
+</div>
+</div>
 </section>
 
-<!-- OFFRES -->
 
-<section id="offres">
-<h1>Nos Offres</h1>
+<!-- ══════════ PILIERS ══════════ -->
+<section class="sec reveal" id="services">
+<div class="stag">Nos 3 piliers stratégiques</div>
+<h2 class="sh2">Une plateforme. Trois dimensions.</h2>
+<div class="piliers-grid">
 
-<div class="card">
-Solutions dédiées aux :
-<ul>
-<li>Entreprises</li>
-<li>Assurances</li>
-<li>Institutions publiques</li>
-<li>ONG</li>
-<li>Patients privés & VIP</li>
+<div class="pilier">
+<div class="p-num">01</div>
+<div class="p-code">MedEva</div>
+<h3>Coordination d'évacuation médicale internationale</h3>
+<p>Organisation complète du signalement jusqu'à l'admission hospitalière à l'étranger. Logistique, administration, escorte médicale, suivi en temps réel.</p>
+</div>
+
+<div class="pilier">
+<div class="p-num">02</div>
+<div class="p-code">MedLink</div>
+<h3>Télémédecine et orientation spécialisée</h3>
+<p>Mise en relation directe avec des spécialistes internationaux pour second avis médical, contre-expertise ou téléconsultation à distance, simple et sécurisée.</p>
+</div>
+
+<div class="pilier">
+<div class="p-num">03</div>
+<div class="p-code">DataMed</div>
+<h3>Gestion sécurisée et traçabilité complète</h3>
+<p>Centralisation des dossiers médicaux, accès hiérarchisé, archivage sécurisé aux standards internationaux et reporting structuré.</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ══════════ BANDEAU ROUGE ══════════ -->
+<div class="red-band reveal">
+<div class="red-band-in">
+<h2>Digitaliser la coordination médicale pour garantir <em>transparence, efficacité et responsabilité.</em></h2>
+<button class="btn-wh" onclick="document.querySelector('#packs').scrollIntoView({behavior:'smooth'})">Voir nos offres</button>
+</div>
+</div>
+
+
+<!-- ══════════ PACKS ══════════ -->
+<section class="sec sec-gray reveal" id="packs">
+<div class="stag">Nos offres de partenariat</div>
+<h2 class="sh2">Choisissez votre couverture.</h2>
+<div class="packs-grid">
+
+<div class="pack">
+<div class="pack-tier">Pack Spécial</div>
+<div class="pack-name">MedLink</div>
+<div class="pack-sub">Sur devis · Télémédecine ciblée</div>
+<div class="pack-hr"></div>
+<ul class="pack-list">
+<li><span class="ck">✓</span> Accès direct à des spécialistes étrangers</li>
+<li><span class="ck">✓</span> Téléconsultations internationales</li>
+<li><span class="ck">✓</span> Second avis ou contre-expertise</li>
+<li><span class="ck">✓</span> Processus simple et sécurisé</li>
 </ul>
+<button class="pack-btn pbtn-ol" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Spécial – MedLink'">Demander un devis</button>
 </div>
 
-</section>
-
-<!-- PROCESSUS -->
-
-<section id="processus">
-<h1>Processus</h1>
-
-<div class="card">
-1. Analyse du dossier médical<br>
-2. Validation hospitalière<br>
-3. Organisation du transfert<br>
-4. Admission hospitalière<br>
-5. Suivi post-traitement
+<div class="pack feat">
+<div class="pack-badge">Recommandé</div>
+<div class="pack-tier">Pack Premium</div>
+<div class="pack-name">MEDBRIDΞPLUS</div>
+<div class="pack-sub">Sur devis · Couverture totale</div>
+<div class="pack-hr"></div>
+<ul class="pack-list">
+<li><span class="ck">✓</span> MedEva : Coordination complète des évacuations</li>
+<li><span class="ck">✓</span> MedLink : Télémédecine internationale</li>
+<li><span class="ck">✓</span> DataMed : Gestion sécurisée des dossiers</li>
+<li><span class="ck">✓</span> Suivi numérique du signalement à l'archivage</li>
+<li><span class="ck">✓</span> Reporting détaillé pour entreprises &amp; institutions</li>
+<li><span class="ck">✓</span> Disponibilité 24/7</li>
+</ul>
+<button class="pack-btn pbtn-rd" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Premium – MEDBRIDΞPLUS'">Demander un devis</button>
 </div>
 
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact">
-<h1>Contact</h1>
-
-<div class="card">
-Email : contact@medbridgeplus.net<br>
-Johannesburg – Afrique du Sud<br>
-Kinshasa – RDC
+<div class="pack">
+<div class="pack-tier">Pack Standard</div>
+<div class="pack-name">MedEva + DataMed</div>
+<div class="pack-sub">Sur devis · Coordination &amp; traçabilité</div>
+<div class="pack-hr"></div>
+<ul class="pack-list">
+<li><span class="ck">✓</span> Coordination des évacuations médicales</li>
+<li><span class="ck">✓</span> Gestion numérique des dossiers patients</li>
+<li><span class="ck">✓</span> Transmission rapide et sécurisée</li>
+<li><span class="ck">✓</span> Reporting structuré pour planification</li>
+</ul>
+<button class="pack-btn pbtn-ol" onclick="document.getElementById('devis-modal').style.display='flex';document.getElementById('devis-pack').value='Pack Standard – MedEva + DataMed'">Demander un devis</button>
 </div>
 
+</div>
 </section>
 
-<!-- FOOTER -->
 
+<!-- ══════════ PROCESSUS ══════════ -->
+<section class="sec reveal" id="processus">
+<div class="stag">Notre méthode</div>
+<h2 class="sh2">10 étapes. Zéro improvisation.</h2>
+<div class="steps-wrap">
+<div class="steps-row">
+<div class="step"><div class="snum">01</div><h4>Signalement</h4><p>Activation du cas et ouverture du dossier numérique</p></div>
+<div class="step"><div class="snum">02</div><h4>Analyse médicale</h4><p>Évaluation approfondie de la situation clinique</p></div>
+<div class="step"><div class="snum">03</div><h4>Télémédecine</h4><p>Consultation spécialisée internationale si nécessaire</p></div>
+<div class="step"><div class="snum">04</div><h4>Destination</h4><p>Validation de l'établissement hospitalier cible</p></div>
+<div class="step"><div class="snum">05</div><h4>Organisation</h4><p>Démarches administratives et visa médical</p></div>
+</div>
+<div class="steps-row">
+<div class="step"><div class="snum">06</div><h4>Logistique</h4><p>Transport et escorte médicale si requise</p></div>
+<div class="step"><div class="snum">07</div><h4>Admission</h4><p>Accueil et prise en charge hospitalière</p></div>
+<div class="step"><div class="snum">08</div><h4>Suivi temps réel</h4><p>Monitoring continu du parcours patient</p></div>
+<div class="step"><div class="snum">09</div><h4>Rapport final</h4><p>Documentation complète et structurée</p></div>
+<div class="step"><div class="snum">10</div><h4>Archivage sécurisé</h4><p>Clôture et conservation du dossier</p></div>
+</div>
+</div>
+</section>
+
+
+<!-- ══════════ ENGAGEMENTS — fond marine ══════════ -->
+<section class="sec sec-navy reveal">
+<div class="stag">Partenariats &amp; engagements</div>
+<h2 class="sh2">Des valeurs non négociables.</h2>
+<div class="eng-grid">
+<div class="eng-card">
+<div class="eng-n">01</div>
+<h4>Réseau hospitalier international</h4>
+<p>Collaboration avec des groupes hospitaliers de référence et services d'urgence disponibles 24h/24, 7j/7.</p>
+</div>
+<div class="eng-card">
+<div class="eng-n">02</div>
+<h4>Éthique professionnelle</h4>
+<p>Coordination rigoureuse et éthique. Chaque décision est médicalement justifiée et entièrement documentée.</p>
+</div>
+<div class="eng-card">
+<div class="eng-n">03</div>
+<h4>Confidentialité absolue</h4>
+<p>Neutralité institutionnelle et protection des données selon les standards internationaux les plus stricts.</p>
+</div>
+<div class="eng-card">
+<div class="eng-n">04</div>
+<h4>Expansion continentale</h4>
+<p>Déploiement progressif vers l'Europe, l'Amérique du Nord, le Moyen-Orient et l'Asie.</p>
+</div>
+</div>
+</section>
+
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="sec sec-offwhite reveal" id="contact">
+<div class="contact-grid">
+
+<div>
+<div class="stag">Nous contacter</div>
+<h2 class="sh2">Construisons votre solution ensemble.</h2>
+<div class="cinfo">
+<div>
+<div class="ci-lbl">Bureau Afrique du Sud</div>
+<div class="ci-val">Cresta, Johannesburg<br>2194 Gauteng, South Africa<br><strong>+27 (73) 94 90 493</strong></div>
+</div>
+<div class="c-hr"></div>
+<div>
+<div class="ci-lbl">Bureau RDC</div>
+<div class="ci-val">01, Malemba-Nkulu<br>Q/ Socimat, C/ GOMBE<br>Kinshasa, Rép. Dém. du Congo<br><strong>+243 818 092 797</strong></div>
+</div>
+<div class="c-hr"></div>
+<div>
+<div class="ci-lbl">Email &amp; Web</div>
+<div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e1828e8f95808295a18c8485839388858684918d9492cf8f8495">[email&#160;protected]</a><br><strong>www.medbridgeplus.net</strong></div>
+</div>
+</div>
+</div>
+
+<div class="cform">
+<div class="form-row">
+<input type="text" placeholder="Nom &amp; Prénom">
+<input type="text" placeholder="Organisation">
+</div>
+<input type="email" placeholder="Adresse email professionnelle">
+<select>
+<option value="" disabled selected>Type de structure</option>
+<option>Entreprise / Groupe</option>
+<option>Hôpital / Clinique</option>
+<option>Autorité gouvernementale</option>
+<option>ONG / Institution internationale</option>
+<option>Particulier</option>
+</select>
+<select>
+<option value="" disabled selected>Pack d'intérêt</option>
+<option>Pack Premium – MEDBRIDΞPLUS</option>
+<option>Pack Standard – MedBridge + DataMed</option>
+<option>Pack Spécial – MedLink</option>
+<option>Je ne sais pas encore</option>
+</select>
+<textarea rows="5" placeholder="Décrivez votre besoin ou situation médicale..."></textarea>
+<button class="btn-red" style="align-self:flex-start;padding:1.05rem 2.8rem;font-size:0.72rem;" onclick="document.getElementById('devis-modal').style.display='flex'">Envoyer la demande</button>
+</div>
+
+</div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
-© 2026 MEDBRIDGΞPLUS — Coordination Médicale Internationale
+<div class="foot-brand">
+<!--
+LOGO FOOTER : remplacez par :
+<img src="logo.png" alt="Logo" style="height:70px;width:auto;">
+-->
+<div class="foot-logo"><span>Logo</span></div>
+<span class="foot-wm">MEDBRID<span class="xi">Ξ</span>PLUS</span>
+</div>
+<div class="foot-copy">© 2025–2026 MEDBRIDΞPLUS (PTY) Ltd. · medbridgeplus.net</div>
+<div class="foot-links">
+<a href="https://www.linkedin.com/company/medbridgeplus-pty-ltd/" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://www.facebook.com/share/1BwuuR8abC/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+<a href="https://www.instagram.com/medbridgeplus?igsh=b3JxenQ1ODd0eTN5&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+<a href="https://x.com/medbridg22?s=11&t=KiTvHMjeUvV2pzNb5k8zMQ" target="_blank" rel="noopener">Twitter / X</a>
+<a href="https://www.tiktok.com/@medbridgeplus22" target="_blank" rel="noopener">TikTok</a>
+<a href="https://whatsapp.com/channel/0029Vb71SvmJuyAEXSkl5P38" target="_blank" rel="noopener">WhatsApp</a>
+<a href="/cdn-cgi/l/email-protection#d9bab6b7adb8baad99b4bcbdbbabb0bdbebca9b5acaaf7b7bcad">Email</a>
+</div>
 </footer>
 
+
+<!-- ══════════ MODAL DEVIS ══════════ -->
+<div class="modal-overlay" id="devis-modal" onclick="if(event.target===this)this.style.display='none'">
+<div class="modal-box">
+<div class="modal-head">
+<div class="modal-tag">Demande de devis</div>
+<div class="modal-title">Choisissez votre pack<br>et parlons-en.</div>
+<button class="modal-close" onclick="document.getElementById('devis-modal').style.display='none'">✕</button>
+</div>
+<div class="modal-body">
+<div class="modal-row">
+<input type="text" placeholder="Nom &amp; Prénom" required>
+<input type="text" placeholder="Organisation / Entreprise">
+</div>
+<div class="modal-row">
+<input type="email" placeholder="Email professionnel" required>
+<input type="tel" placeholder="Téléphone / WhatsApp">
+</div>
+<select>
+<option value="" disabled selected>Type de structure</option>
+<option>Entreprise / Groupe industriel</option>
+<option>Hôpital / Clinique</option>
+<option>Autorité gouvernementale</option>
+<option>ONG / Institution internationale</option>
+<option>Particulier</option>
+</select>
+<select id="devis-pack">
+<option value="" disabled selected>Pack d'intérêt</option>
+<option value="Pack Premium – MEDBRIDΞPLUS">Pack Premium – MEDBRIDΞPLUS (Couverture totale)</option>
+<option value="Pack Standard – MedEva + DataMed">Pack Standard – MedEva + DataMed</option>
+<option value="Pack Spécial – MedLink">Pack Spécial – MedLink (Télémédecine)</option>
+<option value="Je ne sais pas encore">Je ne sais pas encore — conseillez-moi</option>
+</select>
+<textarea rows="4" placeholder="Décrivez brièvement votre besoin ou situation médicale..."></textarea>
+<button class="modal-submit">Envoyer ma demande de devis →</button>
+<div class="modal-note">Nous vous répondons sous <strong>24h</strong> · Échange confidentiel<br>📞 +27 (73) 94 90 493 &nbsp;|&nbsp; contact@medbridgeplus.net</div>
+</div>
+</div>
+</div>
+
+
+<script>
+/* Scroll reveal */
+const io = new IntersectionObserver(entries => {
+entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Nav shadow on scroll */
+window.addEventListener('scroll', () => {
+document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* Fermer modal avec Escape */
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') document.getElementById('devis-modal').style.display = 'none';
+});
+</script>
 </body>
 </html>
