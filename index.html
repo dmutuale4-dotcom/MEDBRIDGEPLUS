@@ -555,6 +555,16 @@ transition:border-color .2s, box-shadow .2s;
 .modal-submit:hover { background:var(--red-dark); }
 .modal-note { font-size:0.78rem; color:var(--gray-text); text-align:center; line-height:1.6; }
 @media(max-width:560px) { .modal-row { grid-template-columns:1fr; } .modal-head, .modal-body { padding-left:1.5rem; padding-right:1.5rem; } }
+.apropos-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:3rem; }
+.apropos-bottom { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1.5rem; }
+.foot-links { display:flex; flex-wrap:wrap; gap:0.8rem 1.4rem; }
+
+@media (max-width:768px) {
+.apropos-grid { grid-template-columns:1fr; gap:1.5rem; }
+.apropos-bottom { grid-template-columns:1fr; gap:1rem; }
+.foot-links { flex-wrap:wrap; gap:0.7rem 1.2rem; }
+footer { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+}
 </style>
 </head>
 <body>
@@ -648,7 +658,7 @@ Demander un devis
 <section class="sec sec-navy reveal" id="apropos">
 <div class="stag">À propos</div>
 <h2 class="sh2">Qui sommes-nous ?</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;">
+<div class="apropos-grid">
 <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-top:3px solid var(--red);border-radius:12px;padding:2.6rem 2.2rem;">
 <div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem;">Notre Vision</div>
 <h3 style="font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1.35;margin-bottom:1.1rem;">Faire de la coordination médicale internationale un droit accessible à tous.</h3>
@@ -660,7 +670,7 @@ Demander un devis
 <p style="font-size:0.9rem;line-height:1.85;color:rgba(255,255,255,0.5);font-weight:300;">Notre mission est de devenir le partenaire de référence en Afrique pour la coordination médicale internationale — en offrant une plateforme digitale intégrée qui gère l'évacuation médicale, la télémédecine et la traçabilité des dossiers, avec rigueur, éthique et efficacité.</p>
 </div>
 </div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem;">
+<div class="apropos-bottom">
 <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1.8rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;">
 <span style="font-size:1.6rem;flex-shrink:0;">🌍</span>
 <div><div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Présence continentale</div><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;">Hub opérationnel en Afrique du Sud, bureau en RDC, expansion vers l'Europe et l'Asie.</p></div>
@@ -1013,6 +1023,7 @@ if (e.key === 'Escape') document.getElementById('devis-modal').style.display = '
 </script>
 </body>
 </html>
+
 
 
 
