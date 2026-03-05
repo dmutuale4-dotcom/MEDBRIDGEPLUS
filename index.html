@@ -559,11 +559,10 @@ transition:border-color .2s, box-shadow .2s;
 .apropos-bottom { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1.5rem; }
 .foot-links { display:flex; flex-wrap:wrap; gap:0.8rem 1.4rem; }
 
-@media (max-width:768px) {
-.apropos-grid { grid-template-columns:1fr; gap:1.5rem; }
-.apropos-bottom { grid-template-columns:1fr; gap:1rem; }
-.foot-links { flex-wrap:wrap; gap:0.7rem 1.2rem; }
-footer { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+@media (max-width:480px) {
+.nav-brand img { height:32px !important; }
+.nav-brand span span { font-size:0.45rem !important; }
+.nav-cta { padding:0.5rem 0.8rem; font-size:0.56rem; }
 }
 </style>
 </head>
@@ -571,12 +570,12 @@ footer { flex-direction:column; align-items:flex-start; gap:1.5rem; }
 
 <!-- ══════════ NAV ══════════ -->
 <nav>
-<a class="nav-brand" href="/" onclick="window.location.reload();return false;" style="text-decoration:none;display:flex;align-items:center;gap:1rem;cursor:pointer;">
+<a class="nav-brand" href="/" onclick="window.location.reload();return false;" style="text-decoration:none;display:flex;align-items:center;gap:0.3rem;cursor:pointer;">
 <img src="logo3.png" alt="MedBridgePlus" style="height:42px;width:auto;object-fit:contain;">
-<span style="display:flex;flex-direction:column;gap:2px;line-height:1.3;">
-<span style="font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:0.14em;color:var(--navy);">EVAMED</span>
-<span style="font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:0.14em;color:var(--red);">MEDLINK</span>
-<span style="font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:0.14em;color:var(--navy);">DATAMED</span>
+<span style="display:flex;flex-direction:column;gap:1px;line-height:1.2;">
+<span style="font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.12em;color:var(--navy);">EVAMED</span>
+<span style="font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.12em;color:var(--red);">MEDLINK</span>
+<span style="font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.12em;color:var(--navy);">DATAMED</span>
 </span>
 </a>
 
@@ -917,12 +916,12 @@ pour les entreprises, hôpitaux et autorités.
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-<a href="/" onclick="window.location.reload();return false;" class="foot-brand" style="text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:1.2rem;">
-<img src="logo3.png" alt="MedBridgePlus" style="height:130px;width:auto;object-fit:contain;">
-<span style="display:flex;flex-direction:column;gap:4px;line-height:1.3;">
-<span style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:0.14em;color:var(--navy);">EVAMED</span>
-<span style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:0.14em;color:var(--red);">MEDLINK</span>
-<span style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:0.14em;color:var(--navy);">DATAMED</span>
+<a href="/" onclick="window.location.reload();return false;" class="foot-brand" style="text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:0.4rem;">
+<img src="logo3.png" alt="MedBridgePlus" style="height:100px;width:auto;object-fit:contain;">
+<span style="display:flex;flex-direction:column;gap:3px;line-height:1.2;">
+<span style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.12em;color:var(--navy);">EVAMED</span>
+<span style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.12em;color:var(--red);">MEDLINK</span>
+<span style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.12em;color:var(--navy);">DATAMED</span>
 </span>
 </a>
 <div class="foot-copy">© 2025–2026 MEDBRIDGEPLUS (PTY) Ltd. · medbridgeplus.net</div>
@@ -1031,6 +1030,7 @@ if (e.key === 'Escape') document.getElementById('devis-modal').style.display = '
 </script>
 </body>
 </html>
+
 
 
 
